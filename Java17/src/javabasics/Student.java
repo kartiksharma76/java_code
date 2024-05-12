@@ -1,10 +1,10 @@
 package javabasics;
 
 public class Student {
-	public String name = "Kundan Kumar";
-	public int rollNumber = 456;
-	public String college = "APJ abdul kalam";
-	public char section = 'A';
+	public String name = "Kartik Sharma";
+	public int rollNumber = 789;
+	public String college = "Sagar Institute of Research and Technology ";
+	public char section = 'B';
 
 	public static void main(String[] args) {
 		Student student = new Student();
