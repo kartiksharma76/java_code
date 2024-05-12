@@ -3,8 +3,11 @@ package javabasics;
 public class Test {
 
 	public static void main(String[] args) {
-		System.out.println("Hello Java");
-
+		Student student = new Student();
+		System.out.println(student.name);
+		System.out.println(student.rollNumber);
+		System.out.println(student.section);
+		System.out.println(student.college);
 	}
 
 }
