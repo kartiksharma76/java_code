@@ -25,6 +25,7 @@ public class Collage {
 		String department = Collage.department;
 		System.out.println(department);
 // system.out.println(college.department);
+
 		int student = Collage.student;
 		System.out.println(student);
 		int UG = Collage.UG;
