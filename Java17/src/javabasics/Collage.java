@@ -21,7 +21,6 @@ public class Collage {
 	public static String collagename = "SIRT";
 
 	public static void main(String[] args) {
-		new Collage();
 		String department = Collage.department;
 		System.out.println(department);
 // system.out.println(college.department);
