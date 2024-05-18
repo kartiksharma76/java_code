@@ -1,27 +1,28 @@
 package javabasics;
 
 public class Elephant {
-	public int legs = 4;
-	public int ear = 2;
+	public static int legs = 4;
+	public static  int ear = 2;
 	public int weight = 6000;
-	public String colour = "grayish to broun";
-	public String tail = "long";
-	public String nose = "long";
+	public  String colour = "grayish to broun";
+	public static int  tail = 1;
+	public static  int nose = 1;
 
 	public static void main(String[] argu) {
 		Elephant elephant = new Elephant();
-		int legs = elephant.legs;
+		int legs = Elephant.legs;
 		System.out.println(legs);
 //System.out.println(elephant.name);
-		int ear = elephant.ear;
+		
+		int ear = Elephant.ear;
 		System.out.println(ear);
 		int weight = elephant.weight;
 		System.out.println(weight);
 		String colour = elephant.colour;
 		System.out.println(colour);
-		String tail = elephant.tail;
+		int  tail = Elephant.tail;
 		System.out.println(tail);
-		String nose = elephant.nose;
+		int  nose = Elephant.nose;
 		System.out.println(nose);
 
 	}
