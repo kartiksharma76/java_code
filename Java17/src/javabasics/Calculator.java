@@ -1,7 +1,8 @@
 package javabasics;
 
 public class Calculator {
-	public int addition(int a, int b) {
+	
+	public static  int addition(int a, int b) {
 		return a + b;
 	}
 
@@ -9,7 +10,7 @@ public class Calculator {
 		return a - b;
 	}
 
-	public int divide(int a, int b) {
+	public static  int divide(int a, int b) {
 		return a / b;
 	}
 
@@ -19,11 +20,11 @@ public class Calculator {
 
 	public static void main(String[] args) {
 		Calculator calculator = new Calculator();
-		int sum = calculator.addition(50, 60);
+		int sum = Calculator.addition(50, 60);
 		System.out.println(sum);
 		int sub = calculator.subtract(90, 40);
 		System.out.println(sub);
-		int div = calculator.divide(40, 20);
+		int div = Calculator.divide(40, 20);
 		System.out.println(div);
 		int multiply = calculator.multiply(20, 20);
 		System.out.println(multiply);
