@@ -18,6 +18,7 @@ public class DataTypeDefaltValue {
 		System.out.println(DataTypeDefaltValue.l);
 		System.out.println(DataTypeDefaltValue.f);
 		System.out.println(DataTypeDefaltValue.d);
+		System.out.println(DataTypeDefaltValue.c);
 		System.out.println(DataTypeDefaltValue.bol);
 		System.out.println(DataTypeDefaltValue.str);
 

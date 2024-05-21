@@ -1,5 +1,7 @@
 package javabasics;
 
+import java.io.PrintStream;
+
 public class Test {
 
 	public static void main(String[] args) {
@@ -8,6 +10,8 @@ public class Test {
 		System.out.println(student.rollNumber);
 		System.out.println(student.section);
 		System.out.println(student.college);
+		PrintStream out = java.lang.System.out;
+		out.println("Hello Kartik");
 	}
 
 }
