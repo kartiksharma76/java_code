@@ -23,7 +23,25 @@ public class ArthematicOperater {
 		a1 = a2 + a1;
 		System.out.println(a1);
 		System.out.println(a2);
-
+		byte b4=40;
+		byte b5 =30;
+		int b6=b4*b5;
+		long w=30;
+		int e=40;
+	long m=w*e;
+	float f1=30;
+	double d1 =40;
+	double h=f1*d1;
+	int a11 =30;
+	int a22=40;
+	// without using third variable swape the value of a11 and a22
+	// int a4=a5;
+	// int a5=a4;
+	a11=a11/a22;
+	a22=a11*a22;
+	System.out.println(a11);
+	System.out.println(a22);
+		
 	}
 
 }
