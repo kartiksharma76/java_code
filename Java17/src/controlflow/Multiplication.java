@@ -7,5 +7,6 @@ public class Multiplication {
 			System.out.println(n + "*" + i + "=" + n * i);
 
 		}
+
 	}
 }
