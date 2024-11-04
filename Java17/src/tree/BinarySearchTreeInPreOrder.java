@@ -1,6 +1,6 @@
 package tree;
 
-public class BinarySearchTreePreOrder {
+public class BinarySearchTreeInPreOrder {
 	private Node root;
 
 	public void inseart(int key) {

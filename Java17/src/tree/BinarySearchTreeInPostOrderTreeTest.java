@@ -1,8 +1,8 @@
 package tree;
 
-public class BinarySearchTreeInPostOrderTest {
+public class BinarySearchTreeInPostOrderTreeTest {
 	public static void main(String[] args) {
-		BinarySearchTreeInPostOrder Tree = new BinarySearchTreeInPostOrder();
+		BinarySearchTreeInPostOrderTree Tree = new BinarySearchTreeInPostOrderTree();
 		Tree.inseart(50);
 		Tree.inseart(30);
 		Tree.inseart(70);
@@ -14,5 +14,4 @@ public class BinarySearchTreeInPostOrderTest {
 		System.out.println();
 		System.out.println(Tree.Search(90));
 	}
-
 }
