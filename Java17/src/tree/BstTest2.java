@@ -1,8 +1,8 @@
 package tree;
 
-public class BSTTest1 {
+public class BstTest2 {
 public static void main(String[] args) {
-	BST1 tree= new BST1();
+	Bst2 tree= new Bst2();
 	tree.inseart('B'); 
 	tree.inseart('C');
 	tree.inseart('A');
@@ -13,6 +13,5 @@ public static void main(String[] args) {
 	tree.inseart('F');
 	tree.inseart('I');
 	tree.traversepostorder();
-	
 }
 }

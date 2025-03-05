@@ -13,5 +13,7 @@ public class AvlTreeTest1 {
 		avl.insert(20);
 		avl.insert(28);
 		avl.inOrder();
+	 
 	}
 }
+ 

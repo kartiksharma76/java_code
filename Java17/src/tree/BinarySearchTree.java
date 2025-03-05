@@ -1,4 +1,4 @@
-package tree;
+ package tree;
 
 public class BinarySearchTree {
 	private Node root;
@@ -70,4 +70,11 @@ public class BinarySearchTree {
 
 	}
 
-}
+	}
+ 
+	
+
+
+
+
+

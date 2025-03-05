@@ -5,10 +5,15 @@ public class Node {
 	public Node left;
 	public int data;
 	public Node right;
+	public String key;
 
 	public Node(int data) {
 		this.data = data;
 
+	}
+
+	public Node(String key2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public static void traverseInordar(Node root) {

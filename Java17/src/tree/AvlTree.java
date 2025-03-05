@@ -1,4 +1,4 @@
-package tree;
+ package tree;
 
 import tree.BinarySearchTree.Node;
 
@@ -22,7 +22,7 @@ public class AvlTree {
 	}
 
 	public int getHeight() {
-		return getHeight(root);
+		return getHeight(root); 
 	}
 
 	private int getHeight(Node node) {

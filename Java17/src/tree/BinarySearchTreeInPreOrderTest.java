@@ -2,7 +2,7 @@ package tree;
 
 public class BinarySearchTreeInPreOrderTest {
 	public static void main(String[] args) {
-		BinarySearchTreePreOrder Tree = new BinarySearchTreePreOrder();
+		BinarySearchTreeInPreOrder Tree = new BinarySearchTreeInPreOrder();
 		Tree.inseart(50);
 		Tree.inseart(30);
 		Tree.inseart(70);
@@ -14,5 +14,4 @@ public class BinarySearchTreeInPreOrderTest {
 		System.out.println();
 		System.out.println(Tree.Search(90));
 	}
-
 }

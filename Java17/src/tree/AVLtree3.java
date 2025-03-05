@@ -1,6 +1,7 @@
-  package tree;
+package tree;
 
-public class AvlTree1 {
+
+public class AVLtree3 {
 	private Node root;
 
 	public int getHeight() {
@@ -115,18 +116,7 @@ public class AvlTree1 {
 	
  
    }
-	public AvlTree1() {
-//		root = new Node(10);
-//		root.height = 3;
-//		root.right = new Node(20);
-//		root.right.height = 2;
-//		root.right.right = new Node(30);
-//		root = new Node(30);
-//		root.height = 3;
-//		root.left = new Node(20);
-//		root.left.height = 2;
-//		root.left.left = new Node(10);
-	}
+	
 
 	class Node {
 		int key;

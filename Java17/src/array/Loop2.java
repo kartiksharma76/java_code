@@ -1,4 +1,4 @@
-package controlflow;
+package array;
 
 public class Loop2 {
 	public static void main(String[] args) {

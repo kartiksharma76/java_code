@@ -5,7 +5,7 @@ public class BST1 {
 
 	public void inseart(char c) {
 		root = insertHelper(root, c);
-	}
+	} 
 
 	public Node insertHelper(Node root, char c) {
 		if (root == null) {

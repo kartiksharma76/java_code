@@ -1,41 +1,39 @@
 package tree;
 
-public class BinarySearchTree1 {
+public class Bst2 {
 	private Node root;
 
-	public void inseart(int key) {
-		root = insertHelper(root, key);
+	public void inseart(char c) {
+		root = insertHelper(root, c);
+	} 
 
-	}
-
-	private Node insertHelper(Node root, int key) { 
+	public Node insertHelper(Node root, char c) {
 		if (root == null) {
-			root = new Node(key);
+			root = new Node(c);
+
 			return root;
-
 		}
-		if (key < root.key) {
-			root.left = insertHelper(root.left, key);
+		if (c < root.C) {
+			root.left = insertHelper(root.left, c);
 
-		} else if (key > root.key) {
-			root.right = insertHelper(root.right, key);
-
+		} else if (c > root.C) {
+			root.right = insertHelper(root.right, c);
 		}
+
 		return root;
-
 	}
 
-	public boolean Search(int key) {
+	public boolean Search(char key) {
 		return SearchHelper(root, key = key) != null;
 
 	}
 
-	private Node SearchHelper(Node root, int key) {
-		if (root == null || root.key == key) {
+	private Node SearchHelper(Node root, char key) {
+		if (root == null || root.C == key) {
 			return root;
 
 		}
-		if (key < root.key) {
+		if (key < root.C) {
 			return SearchHelper(root.left, key);
 
 		}
@@ -53,7 +51,7 @@ public class BinarySearchTree1 {
 			return;
 		}
 		traverseInorder(root.left);
-		System.out.println(root.key + " ");
+		System.out.println(root.C + " ");
 		traverseInorder(root.right);
 
 	}
@@ -67,7 +65,7 @@ public class BinarySearchTree1 {
 			return;
 
 		}
-		System.out.println(root.key + " ");
+		System.out.println(root.C + " ");
 		traversepreorder(root.left);
 		traversepreorder(root.right);
 	}
@@ -83,18 +81,17 @@ public class BinarySearchTree1 {
 		}
 		traversepostorder(root.left);
 		traversepostorder(root.right);
-		System.out.println(root.key + " ");
+		System.out.println(root.C + " ");
 	}
 
 	class Node {
-		private int key;
+		private char C;
 		private Node left;
 		private Node right;
 
-		public Node(int key) {
+		public Node(char C) {
 			super();
-			this.key = key;
+			this.C = C;
 		}
-
 	}
 }
