@@ -8,8 +8,8 @@ public static void main(String[] args) {
 	ThreadExample th2=new ThreadExample();
 	//th2.printoddNumber();
 	th2.start();
-	for(int i=0;i<=10;i++) {
-		System.out.println("main Thread");
+	for(int i=1;i<=10;i++) {
+		System.out.println("main thread");
 	}
 
 }
