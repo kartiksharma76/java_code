@@ -1,4 +1,4 @@
-package com.jdbc.operation.v2;
+package com.jdbc.operation;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,10 +7,13 @@ import java.sql.Statement;
 
 public class UpdateOperation {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		
-				Connection connection = JdbcUtil.getMysqlConnection();
+		// step1. load the driver
+				Class.forName("com.mysql.cj.jdbc.Driver");
+		// step2. Establish the connection between JDBC program and database
+				String url = "jdbc:mysql://localhost:3306/test ";
+				Connection connection = DriverManager.getConnection(url, "root", "Kartik@2005");
 		// step3. prepare the SQL statement
-				String quary = "UPDATE student SET stu_name='Ishita' WHERE roll_number=16";
+				String quary = "update student set stu_name='KARTIK SHARMA' where roll_number=10";
 		// step4. create the JDBC statement using connection
 				Statement statement = connection.createStatement();
 		// step5. submit the SQL statement using JDBC statement
@@ -22,6 +25,7 @@ public class UpdateOperation {
 					System.out.println("record not updated");
 				}
 		// step7. close the resources
-				JdbcUtil.closeResource(statement, connection);
+				connection.close();
+				statement.close();
 			}
 }
