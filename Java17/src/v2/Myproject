@@ -1,0 +1,25 @@
+Create table:-
+mybook 
+having attributes:-
+1)book_id (varchar(20)) (primary key)
+2)book_name (varchar(100))
+3)author (varchar(100))
+4)publicatin (varchar(100))
+5)cost (int)
+6)edition (int)
+ 
+user
+ having attributes:-
+1)user_name (varchar(100)) (primary key) (email id)
+2)password (varchar(50))
+
+Perform CURD operation
+
+1)Book
+2)BookSevice
+  *verifyUser(username,pass) boolean
+  *deleteBook(book_id)
+  *fetchBookByBookId(book_id)
+  *updateBook(Book)
+  *fetchAllBook()
+  *fetchBookByAuthor(author)
