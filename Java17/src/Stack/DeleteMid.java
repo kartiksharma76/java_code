@@ -1,66 +1,90 @@
-package Stack;
+package StackQuestions;
 
 public class DeleteMid {
-	private Node head;
+	private int size;
+	private Node top;
+	private Node peek;
 
 	public void push(int data) {
 		Node node = new Node(data, null);
-		node.next = head;
-		head = node;
+		if (top == null) {
+			top = node;
+			peek = top;
+		} else {
+			peek.next = node;
+			peek = node;
+			size++;
 
+		}
 	}
 
 	public int pop() {
-		if (head == null) {
-			System.out.println("stack is empty");
+		if (top == null) {
+			System.out.println("stack is under flow ");
 			return -1;
 		}
-		int data = head.data;
-		head = head.next;
+		int data = top.data;
+		top = top.next;
 		return data;
 	}
 
-	public void deletebyposition(int position) {
-		if (position < 0 || position >= Size()) {
-			return;
-		}
-		if (position == 0) {
-			head = head.next;
-			return;
-		}
-		Node temp = head;
-		for (int i = 0; i < position - 1; i++) {
-			temp = temp.next;
-		}
-		temp.next = temp.next.next;
+	public int peek(int data) {
+		System.out.println("stack is empty");
+		return top.data;
 	}
 
-	public int Size() {
-		int size = 0;
-		Node temp = head;
-		while (temp != null) {
-			size++;
-			temp = temp.next;
-		}
-		return size;
+	public boolean isempty() {
+		return top == null;
+
 	}
 
 	public void print() {
-		Node temp = head;
+		Node temp = top;
 		while (temp != null) {
 			System.out.println(temp.data);
 			temp = temp.next;
 		}
 	}
-}
 
-class Node {
-	int data;
-	Node next;
+	private Node deleteMid(Node temp, int tempnext) {
+		if (temp == null) {
+			return null;
+		}
+		if (tempnext == size / 2) {
+			size--;
+			return temp.next; // skip the middle node
+		}
+		temp.next = deleteMid(temp.next, tempnext + 1);
+		return temp;
+	}
 
-	public Node(int data, Node next) {
-		super();
-		this.data = data;
-		this.next = next;
+	// Public method to delete middle
+	public void deleteMid() {
+		top = deleteMid(top, 0);
+	}
+
+	class Node {
+		private int data;
+		private Node next;
+
+		public Node(int data, Node next) {
+			super();
+			this.data = data;
+			this.next = next;
+		}
+	}
+
+	public static void main(String[] args) {
+		DeleteMid mid = new DeleteMid();
+		mid.push(10);
+		mid.push(20);
+		mid.push(30);
+		mid.push(40);
+		mid.push(50);
+		System.out.println("original stack:");
+		mid.print();
+		System.out.println("after delete:");
+		mid.deleteMid();
+		mid.print();
 	}
 }
