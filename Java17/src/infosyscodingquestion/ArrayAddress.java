@@ -1,0 +1,18 @@
+package infosyscodingquestion;
+
+public class ArrayAddress {
+	public static void main(String[] args) {
+		int baseAddress = 100;
+		int ElemenetSize = 4;
+		int rows = 8;
+		int colums = 8;
+
+		int i = 1;
+		int j = 7;
+		int lowerRowLimit = 1;
+		int lowerColumnLimit = 7;
+
+		int Address = baseAddress + (i - lowerColumnLimit) + colums + (j - lowerColumnLimit) + ElemenetSize;
+		System.out.println("Address of A1(4,12) is:" + Address);
+	}
+}
