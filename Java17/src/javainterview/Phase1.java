@@ -191,7 +191,7 @@ public class Phase1 {
 
 	// Prime helper
 	public static boolean isPrime(int n) {
-		if (n < 2)
+		if (n < 2)     
 			return false;
 		for (int i = 2; i <= Math.sqrt(n); i++) {
 			if (n % i == 0)
