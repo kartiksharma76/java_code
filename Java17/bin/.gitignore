@@ -1,9 +1,3 @@
-/AdvanceThreadingConcepts/
-/Advancethreadingproblem/
-/ArrayQuestion/
-/Collection/
-/Collection2026/
-/DeadLockConcepts/
 /DsaImp/
 /ExceptionHandling/
 /ExecutionOrder/
@@ -11,6 +5,7 @@
 /HackerRank/
 /Hackerrankprepkit/
 /Heap/
+/IO/
 /Infoces/
 /Inheritance/
 /InterviewPrepImpQue/
@@ -89,4 +84,3 @@
 /typeconversion/
 /types/
 /v2/
-/IO/
