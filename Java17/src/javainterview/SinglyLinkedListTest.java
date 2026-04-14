@@ -28,7 +28,7 @@ public class SinglyLinkedListTest {
 
 		System.out.println("After Deletion:");
 		list.print();
-
+ 
 		// Reverse
 		list.addLast(40);
 		list.addLast(50);
