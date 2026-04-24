@@ -14,7 +14,7 @@ class MinMaxSol {
 		for (int i = 0; i <= arr.size() - k; i++) {
 			int currentUnfairness = arr.get(i + k - 1) - arr.get(i);
 			minUnfairness = Math.min(minUnfairness, currentUnfairness);
-		}
+		} 
 
 		return minUnfairness;
 	}
