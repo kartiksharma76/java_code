@@ -10,7 +10,7 @@ public class ArrayReversal {
 		System.out.println("after :" + Arrays.toString(arr));
 	}
 
-	private static void reverseArray(int[] arr) {
+	private static void reverseArray(int[] arr) {  
 		int start = 0;
 		int end = arr.length - 1; 
 		while (start < end) {
@@ -20,6 +20,6 @@ public class ArrayReversal {
 			start++;
 			end--;
 		}
-
+ 
 	}
 }
