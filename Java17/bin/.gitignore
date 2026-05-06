@@ -11,10 +11,8 @@
 /HackerRank/
 /Hackerrankprepkit/
 /Heap/
-/IO/
 /Infoces/
 /Inheritance/
-/InterviewPrepImpQue/
 /Java8Practice/
 /LambdaExpression/
 /Library/
@@ -28,7 +26,6 @@
 /ParkingManagement/
 /Pattern2026/
 /Polymorphism/
-/Practicesheet/
 /ProblemsofStreamAPI/
 /QuickSort/
 /RGPV/
@@ -36,7 +33,6 @@
 /Stack/
 /StackQuestions/
 /Stream/
-/StreamAPI/
 /Synchronization/
 /Test/
 /ThisAndSuper/
@@ -54,11 +50,9 @@
 /datatype/
 /dynamic/
 /dynamicprogram/
-/encapsulation/
 /games/
 /graph/
 /infosyscodingquestion/
-/javabasics/
 /javainterview/
 /javapractice2026/
 /linkedlist/
@@ -90,3 +84,9 @@
 /typeconversion/
 /types/
 /v2/
+/IO/
+/InterviewPrepImpQue/
+/Practicesheet/
+/StreamAPI/
+/encapsulation/
+/javabasics/

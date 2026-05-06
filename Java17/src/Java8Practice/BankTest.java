@@ -45,7 +45,7 @@ public class BankTest {
 		System.out.println("Average Balance: " + avgBalance);
 
 //Branch with Highest Total Balance
-		accounts.stream()
+		accounts.stream()  
 				.collect(Collectors.groupingBy(BankAccount1::getBranch,
 						Collectors.summingDouble(BankAccount1::getBalance)))
 				.entrySet().stream().max(Map.Entry.comparingByValue()).ifPresent(System.out::println);
