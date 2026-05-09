@@ -14,6 +14,7 @@
 /Infoces/
 /Inheritance/
 /Java8Practice/
+/Javaclasses/
 /LambdaExpression/
 /Library/
 /LinkedListProblems/
@@ -26,6 +27,7 @@
 /ParkingManagement/
 /Pattern2026/
 /Polymorphism/
+/Practicesheet/
 /ProblemsofStreamAPI/
 /QuickSort/
 /RGPV/
@@ -33,6 +35,7 @@
 /Stack/
 /StackQuestions/
 /Stream/
+/StreamAPI/
 /Synchronization/
 /Test/
 /ThisAndSuper/
@@ -50,9 +53,11 @@
 /datatype/
 /dynamic/
 /dynamicprogram/
+/encapsulation/
 /games/
 /graph/
 /infosyscodingquestion/
+/javabasics/
 /javainterview/
 /javapractice2026/
 /linkedlist/
@@ -86,7 +91,3 @@
 /v2/
 /IO/
 /InterviewPrepImpQue/
-/Practicesheet/
-/StreamAPI/
-/encapsulation/
-/javabasics/
