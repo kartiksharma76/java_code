@@ -48,8 +48,6 @@ public class AlloperationStack {
 	 * Returns top.data if the stack is not empty. Outputs a message if the stack is
 	 * empty. Complexity: Time: O(1). Space: O(1).
 	 *
-	 * 
-	 * 
 	 */
 	public int peek(int data) {
 		System.out.println("stack is empty" + " ");
