@@ -19,4 +19,4 @@ public class DifferenceArray {
 		}
 		System.out.println(Arrays.toString(arr));
 	}
-}
+} 
