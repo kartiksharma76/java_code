@@ -21,7 +21,7 @@ public class WordBreak {
 				if (dp[j] && set.contains(s.substring(j, i))) {
 
 					dp[i] = true;
-					break;
+					break; 
 				}
 			}
 		}
