@@ -11,7 +11,7 @@ class Bill {
 
 	// Constructor
 	public Bill(String paymentMode) {
-		this.paymentMode = paymentMode; 	
+		this.paymentMode = paymentMode; 	 
 		counter++;
 		this.billId = "B" + counter;
 	}
