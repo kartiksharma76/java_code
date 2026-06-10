@@ -9,6 +9,7 @@ public  class BankAccount implements CheakingAccount, SavingAccount {
 		this.checkingBalance = initialCheckingBalance;
 		this.savingsBalance = initialSavingsBalance;
 		this.interestRate = interestRate;
+		
 	}
 
 	public double InterestRate() {
