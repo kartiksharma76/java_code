@@ -8,7 +8,7 @@ public class FlattenBinaryTree {
 		TreeNode(int v) {
 			val = v;
 		}
-	}
+	} 
 
 	public void flatten(TreeNode root) {
 		TreeNode cur = root;
