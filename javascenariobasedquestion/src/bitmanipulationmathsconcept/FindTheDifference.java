@@ -13,5 +13,5 @@ public class FindTheDifference {
 	public static void main(String[] args) {
 		FindTheDifference sol = new FindTheDifference();
 		System.out.println(sol.findTheDifference("abcd", "abcde"));
-	}
+	} 
 }
