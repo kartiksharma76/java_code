@@ -9,5 +9,5 @@ public class FilterLength {
 		List<String> words = Arrays.asList("Java", "Stream", "API", "Lambda");
 		List<String> filtered = words.stream().filter(w -> w.length() > 4).collect(Collectors.toList());
 		filtered.forEach(System.out::println);
-	}
+	} 
 }

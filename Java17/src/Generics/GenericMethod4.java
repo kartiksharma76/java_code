@@ -10,7 +10,7 @@ public class GenericMethod4 {
 		X x1= new P();
 		X x2= new Q();
 		R r= new R();
-		P p=new P();
+ 		P p=new P();
 		Q q= new Q();
 		Z z = new P();
 		list.add(y);
@@ -34,7 +34,7 @@ public class GenericMethod4 {
 		MyArrayList<X> list5=new MyArrayList<>();
 		MyArrayList<R> list6=new MyArrayList<>();
 		method.M4(list1);
-//		method.M4(list2);
+//		method.M4(list2);  
 //		method.M4(list3);
 //		method.M4(list4);
 		method.M4(list5);
