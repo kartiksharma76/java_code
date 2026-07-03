@@ -1,3 +1,7 @@
+/AdvanceThreadingConcepts/
+/Advancethreadingproblem/
+/ArrayQuestion/
+/Collection/
 /Collection2026/
 /DeadLockConcepts/
 /DsaImp/
@@ -8,11 +12,9 @@
 /HackerRank/
 /Hackerrankprepkit/
 /Heap/
-/IO/
 /Infoces/
 /InfosysSpringboard/
 /Inheritance/
-/InterviewPrepImpQue/
 /Java8Practice/
 /Javaclasses/
 /LambdaExpression/
@@ -27,7 +29,6 @@
 /ParkingManagement/
 /Pattern2026/
 /Polymorphism/
-/Practicesheet/
 /ProblemsofStreamAPI/
 /QuickSort/
 /RGPV/
@@ -35,7 +36,6 @@
 /Stack/
 /StackQuestions/
 /Stream/
-/StreamAPI/
 /Synchronization/
 /Test/
 /ThisAndSuper/
@@ -53,7 +53,6 @@
 /datatype/
 /dynamic/
 /dynamicprogram/
-/encapsulation/
 /games/
 /graph/
 /infosyscodingquestion/
@@ -90,3 +89,8 @@
 /typeconversion/
 /types/
 /v2/
+/IO/
+/InterviewPrepImpQue/
+/Practicesheet/
+/StreamAPI/
+/encapsulation/
