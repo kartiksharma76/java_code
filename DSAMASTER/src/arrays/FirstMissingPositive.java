@@ -19,7 +19,7 @@ public class FirstMissingPositive {
 			}
 		}
 
-		// Find the first missing positive
+		// Find the first missing positive 
 		for (int i = 0; i < n; i++) {
 			if (nums[i] != i + 1) {
 				System.out.println("First Missing Positive: " + (i + 1));

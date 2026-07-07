@@ -2,7 +2,7 @@ package javaDsaPattern;
 
 class Node {
 	int data;
-	Node next;
+	Stack next;
 
 	Node(int data) {
 		this.data = data;
@@ -10,11 +10,11 @@ class Node {
 }
 
 public class ReverseLinkedList {
-	public static Node reverse(Node head) {
-		Node prev = null;
-		Node current = head;
+	public static Stack reverse(Stack head) {
+		Stack prev = null;
+		Stack current = head;
 		while (current != null) {
-			Node next = current.next;
+			Stack next = current.next;
 			current.next = prev;
 			prev = current;
 			current = next;
