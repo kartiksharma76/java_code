@@ -29,7 +29,7 @@ public class BeautyOfAllString {
 				}
 
 				beautySum += (maxFreq - minFreq);
-			}
+			} 
 		}
 
 		System.out.println("Beauty Sum: " + beautySum);
