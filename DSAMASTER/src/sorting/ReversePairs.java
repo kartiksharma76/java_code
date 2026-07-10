@@ -25,7 +25,7 @@ public class ReversePairs {
 		merge(arr, low, mid, high);
 
 		return count;
-	}
+	} 
 
 	static int countPairs(int[] arr, int low, int mid, int high) {
 
