@@ -18,7 +18,7 @@ class HorseAnimal extends AnimalBase {
 }
 
 public class AbstractClassImplementationExample {
-
+ 
 	public static void main(String[] args) {
 
 		HorseAnimal horse = new HorseAnimal();
