@@ -1,3 +1,5 @@
+/IO/
+/InterviewPrepImpQue/
 /AdvanceThreadingConcepts/
 /Advancethreadingproblem/
 /ArrayQuestion/
@@ -29,6 +31,7 @@
 /ParkingManagement/
 /Pattern2026/
 /Polymorphism/
+/Practicesheet/
 /ProblemsofStreamAPI/
 /QuickSort/
 /RGPV/
@@ -36,6 +39,7 @@
 /Stack/
 /StackQuestions/
 /Stream/
+/StreamAPI/
 /Synchronization/
 /Test/
 /ThisAndSuper/
@@ -90,7 +94,3 @@
 /typeconversion/
 /types/
 /v2/
-/IO/
-/InterviewPrepImpQue/
-/Practicesheet/
-/StreamAPI/
