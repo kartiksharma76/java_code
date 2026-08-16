@@ -21,7 +21,7 @@ public class ReverseKGroup {
 			ListNode kth = getKthNode(current, k);
 
 			if (kth == null) {
-				break;
+				break; 
 			}
 			ListNode nextGroup = kth.next;
 			ListNode prev = nextGroup;
