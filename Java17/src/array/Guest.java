@@ -8,10 +8,7 @@ class Message {
 
 public class Guest {
     public static void main(String[] args) {
-
-        // Command-line arguments
         String[] arguments = {"Hello", "Rahul", "Sharma"};
-
         Message.main(arguments);
        
     }
