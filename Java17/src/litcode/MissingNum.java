@@ -1,5 +1,6 @@
 package litcode;
 
+
 public class MissingNum {
 	public int missingNum(int[] nums) {
 		int n = nums.length;

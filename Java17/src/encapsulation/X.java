@@ -1,4 +1,4 @@
-package ExceptionHandling;
+package encapsulation;
 
 public class X {
 	public static void main(String[] args) {

@@ -113,7 +113,7 @@ public class AllOperationLinkedlist {
 
 		}
 		temp.next = temp.next.next;
-	}
+	} 
 
 	/**
 	 * middleNode() Algorithm:
