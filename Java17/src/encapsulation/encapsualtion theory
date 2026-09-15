@@ -1,0 +1,46 @@
+encapsulation = it is mechanism of wrapping the data (variable) and behaviour/action on the data(method) in a single 
+unit .
+ purpose of encapsulation
+ 1. to put control on a class 
+ 
+ How to implement encapsulation 
+ 1. make all the variables private 
+ 2. provide access (read and write) through setters and getters method 
+ 
+ Benefits
+ 1. security
+ 
+ encapsulation is a information hiding? 
+  No
+  
+  Information is a piece of knowledge 
+  data in context of encapsulation means resource
+  
+  Scope
+  static variables>instance variable>method argument>local variable
+  
+ 
+ method signature= method name + argument
+  method overloading 
+  1.method name must be same.
+  2.argument must be different.
+     argument might be different based on type.
+      argument might be different based on number of arguments.
+       argument might be different based on argument order.
+ 3.  Don't  bother on return type
+      
+ 
+  
+ 
+ 
+  
+ calling order in method overloading
+  1.exact matching
+  2.byte,short,int,long,float,double (if not exact matching then compiler will search next immediate primitive their matching )
+         char,int,long,float,double
+  3.exact matching wrapper class only
+  4.matching var argument 
+  5. compilation error
+  
+ 
+ 

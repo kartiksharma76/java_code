@@ -1,0 +1,3 @@
+type main+ctrl+spacebar
+type syso+ctrl+spacebar
+ctrl+shift+f(to format the content)

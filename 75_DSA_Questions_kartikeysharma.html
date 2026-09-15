@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>75 DSA Questions — Kartikey Sharma</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #2a2a3a;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --text: #e8e8f0;
+    --muted: #6b6b8a;
+    --code-bg: #0d0d14;
+    --green: #10b981;
+    --pink: #ec4899;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.5;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: pulse-glow 6s ease-in-out infinite;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
+    top: 20%; right: 10%;
+    pointer-events: none;
+    animation: pulse-glow 8s ease-in-out infinite reverse;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.8; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.4);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: #a78bfa;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #7c3aed;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    animation: fadeDown 0.9s ease 0.1s both;
+  }
+
+  .hero-title .num {
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    animation: fadeDown 1s ease 0.2s both;
+  }
+
+  .author-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent3);
+    letter-spacing: 0.05em;
+    animation: fadeDown 1.1s ease 0.3s both;
+  }
+
+  .author-tag span { color: var(--muted); }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fadeDown 1.5s ease 0.6s both;
+  }
+
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%,100% { opacity: 0.4; height: 30px; }
+    50% { opacity: 1; height: 50px; }
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .stat {
+    flex: 1;
+    min-width: 120px;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .stat:last-child { border-right: none; }
+  .stat:hover { background: rgba(124,58,237,0.06); }
+
+  .stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .section-count {
+    margin-left: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  /* ── CATEGORY BLOCK ── */
+  .category {
+    margin-bottom: 5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  }
+
+  .q-card:hover {
+    border-color: rgba(124,58,237,0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(124,58,237,0.12);
+  }
+
+  .q-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .q-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent2);
+    background: rgba(6,182,212,0.1);
+    border: 1px solid rgba(6,182,212,0.25);
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .q-title {
+    font-size: 1rem;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .q-diff {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .diff-easy { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+  .diff-medium { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+  .diff-hard { background: rgba(236,72,153,0.12); color: #ec4899; border: 1px solid rgba(236,72,153,0.3); }
+
+  .q-toggle {
+    color: var(--muted);
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .q-card.open .q-toggle { transform: rotate(180deg); }
+
+  .q-body {
+    display: none;
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .q-card.open .q-body { display: block; }
+
+  .q-problem {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+
+  .code-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .code-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #c4c4e0;
+  }
+
+  .kw { color: #a78bfa; }
+  .type { color: #06b6d4; }
+  .fn { color: #34d399; }
+  .num-lit { color: #f59e0b; }
+  .str { color: #fb7185; }
+  .cm { color: #4a4a6a; font-style: italic; }
+  .op { color: #e879f9; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-name {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-brand {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    white-space: nowrap;
+    font-weight: 700;
+    margin-right: 1rem;
+  }
+
+  .nav-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+    border-color: var(--border);
+    background: var(--card);
+  }
+
+  /* ── COLOR THEMES PER SECTION ── */
+  .theme-violet .section-icon { background: rgba(124,58,237,0.15); }
+  .theme-violet .section-title { color: #a78bfa; }
+  .theme-cyan .section-icon { background: rgba(6,182,212,0.15); }
+  .theme-cyan .section-title { color: #67e8f9; }
+  .theme-amber .section-icon { background: rgba(245,158,11,0.15); }
+  .theme-amber .section-title { color: #fcd34d; }
+  .theme-green .section-icon { background: rgba(16,185,129,0.15); }
+  .theme-green .section-title { color: #6ee7b7; }
+  .theme-pink .section-icon { background: rgba(236,72,153,0.15); }
+  .theme-pink .section-title { color: #f9a8d4; }
+  .theme-blue .section-icon { background: rgba(59,130,246,0.15); }
+  .theme-blue .section-title { color: #93c5fd; }
+  .theme-orange .section-icon { background: rgba(249,115,22,0.15); }
+  .theme-orange .section-title { color: #fdba74; }
+  .theme-teal .section-icon { background: rgba(20,184,166,0.15); }
+  .theme-teal .section-title { color: #5eead4; }
+  .theme-red .section-icon { background: rgba(239,68,68,0.15); }
+  .theme-red .section-title { color: #fca5a5; }
+  .theme-indigo .section-icon { background: rgba(99,102,241,0.15); }
+  .theme-indigo .section-title { color: #a5b4fc; }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 3rem; }
+    .stat { padding: 1rem; }
+    pre { font-size: 0.72rem; }
+    .q-header { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">// kartikeysharma</div>
+  <a class="nav-link" href="#arrays">Arrays</a>
+  <a class="nav-link" href="#strings">Strings</a>
+  <a class="nav-link" href="#linked-lists">Linked Lists</a>
+  <a class="nav-link" href="#stacks">Stacks & Queues</a>
+  <a class="nav-link" href="#binary-search">Binary Search</a>
+  <a class="nav-link" href="#trees">Trees</a>
+  <a class="nav-link" href="#backtracking">Backtracking</a>
+  <a class="nav-link" href="#dp">Dynamic Programming</a>
+  <a class="nav-link" href="#graphs">Graphs</a>
+  <a class="nav-link" href="#bits">Bit Manipulation</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="badge">LeetCode Java Solutions</div>
+  <h1 class="hero-title"><span class="num">75</span><br>DSA Questions</h1>
+  <p class="hero-sub">Curated LeetCode problems with optimal Java solutions<br>across 10 core data structure & algorithm categories</p>
+  <div class="author-tag"><span>crafted by </span>Kartikey Sharma</div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">75</span><span class="stat-label">Problems</span></div>
+  <div class="stat"><span class="stat-num">10</span><span class="stat-label">Categories</span></div>
+  <div class="stat"><span class="stat-num">Java</span><span class="stat-label">Language</span></div>
+  <div class="stat"><span class="stat-num">O(n)</span><span class="stat-label">Optimized</span></div>
+  <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Interviews Cracked</span></div>
+</div>
+
+<!-- ── MAIN ── -->
+<div class="content">
+
+  <!-- 1. ARRAYS -->
+  <section class="category theme-violet" id="arrays">
+    <div class="section-header">
+      <div class="section-icon">🗃️</div>
+      <div class="section-title">Arrays</div>
+      <div class="section-count">10 problems</div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #1</span>
+        <span class="q-title">Two Sum</span>
+        <span class="q-diff diff-easy">Easy</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Find two numbers in the array that add up to a specific target. Return their indices.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="type">Map</span>&lt;<span class="type">Integer</span>, <span class="type">Integer</span>&gt; map = <span class="kw">new</span> <span class="fn">HashMap</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num-lit">0</span>; i &lt; nums.length; i++) {
+    <span class="kw">int</span> diff = target <span class="op">-</span> nums[i];
+    <span class="kw">if</span> (map.<span class="fn">containsKey</span>(diff)) <span class="kw">return new int</span>[]{map.<span class="fn">get</span>(diff), i};
+    map.<span class="fn">put</span>(nums[i], i);
+}</pre>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #121</span>
+        <span class="q-title">Best Time to Buy and Sell Stock</span>
+        <span class="q-diff diff-easy">Easy</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Maximize profit by choosing one day to buy and another to sell.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="kw">int</span> min = <span class="type">Integer</span>.MAX_VALUE, profit = <span class="num-lit">0</span>;
+<span class="kw">for</span> (<span class="kw">int</span> price : prices) {
+    min = <span class="type">Math</span>.<span class="fn">min</span>(min, price);
+    profit = <span class="type">Math</span>.<span class="fn">max</span>(profit, price <span class="op">-</span> min);
+}
+<span class="kw">return</span> profit;</pre>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #88</span>
+        <span class="q-title">Merge Sorted Array</span>
+        <span class="q-diff diff-easy">Easy</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Merge two sorted arrays into one sorted array in-place.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="kw">int</span> i = m<span class="op">-</span><span class="num-lit">1</span>, j = n<span class="op">-</span><span class="num-lit">1</span>, k = m<span class="op">+</span>n<span class="op">-</span><span class="num-lit">1</span>;
+<span class="kw">while</span> (j &gt;= <span class="num-lit">0</span>)
+    nums1[k<span class="op">--</span>] = (i &gt;= <span class="num-lit">0</span> &amp;&amp; nums1[i] &gt; nums2[j]) ? nums1[i<span class="op">--</span>] : nums2[j<span class="op">--</span>];</pre>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #217</span>
+        <span class="q-title">Contains Duplicate</span>
+        <span class="q-diff diff-easy">Easy</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Check if an array contains any duplicate values.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="type">Set</span>&lt;<span class="type">Integer</span>&gt; set = <span class="kw">new</span> <span class="fn">HashSet</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">int</span> num : nums)
+    <span class="kw">if</span> (!set.<span class="fn">add</span>(num)) <span class="kw">return true</span>;
+<span class="kw">return false</span>;</pre>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #238</span>
+        <span class="q-title">Product of Array Except Self</span>
+        <span class="q-diff diff-medium">Medium</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Return an array where each element is the product of all other elements (no division).</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="kw">int</span> n = nums.length;
+<span class="kw">int</span>[] res = <span class="kw">new int</span>[n];
+res[<span class="num-lit">0</span>] = <span class="num-lit">1</span>;
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num-lit">1</span>; i &lt; n; i++) res[i] = res[i<span class="op">-</span><span class="num-lit">1</span>] <span class="op">*</span> nums[i<span class="op">-</span><span class="num-lit">1</span>];
+<span class="kw">int</span> right = <span class="num-lit">1</span>;
+<span class="kw">for</span> (<span class="kw">int</span> i = n<span class="op">-</span><span class="num-lit">1</span>; i &gt;= <span class="num-lit">0</span>; i--) {
+    res[i] <span class="op">*=</span> right;
+    right <span class="op">*=</span> nums[i];
+}
+<span class="kw">return</span> res;</pre>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #53</span>
+        <span class="q-title">Maximum Subarray (Kadane's)</span>
+        <span class="q-diff diff-medium">Medium</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Find the contiguous subarray with the largest sum.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="kw">int</span> max = nums[<span class="num-lit">0</span>], curr = nums[<span class="num-lit">0</span>];
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num-lit">1</span>; i &lt; nums.length; i++) {
+    curr = <span class="type">Math</span>.<span class="fn">max</span>(nums[i], curr <span class="op">+</span> nums[i]);
+    max = <span class="type">Math</span>.<span class="fn">max</span>(max, curr);
+}
+<span class="kw">return</span> max;</pre>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #15</span>
+        <span class="q-title">3Sum</span>
+        <span class="q-diff diff-medium">Medium</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Find all unique triplets in the array which give a sum of zero.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="type">Arrays</span>.<span class="fn">sort</span>(nums);
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num-lit">0</span>; i &lt; nums.length <span class="op">-</span> <span class="num-lit">2</span>; i++) {
+    <span class="kw">if</span> (i &gt; <span class="num-lit">0</span> &amp;&amp; nums[i] == nums[i<span class="op">-</span><span class="num-lit">1</span>]) <span class="kw">continue</span>;
+    <span class="kw">int</span> l = i<span class="op">+</span><span class="num-lit">1</span>, r = nums.length<span class="op">-</span><span class="num-lit">1</span>;
+    <span class="kw">while</span> (l &lt; r) {
+        <span class="kw">int</span> sum = nums[i] <span class="op">+</span> nums[l] <span class="op">+</span> nums[r];
+        <span class="kw">if</span> (sum == <span class="num-lit">0</span>) list.<span class="fn">add</span>(<span class="type">Arrays</span>.<span class="fn">asList</span>(nums[i], nums[l<span class="op">++</span>], nums[r<span class="op">--</span>]));
+        <span class="kw">else if</span> (sum &lt; <span class="num-lit">0</span>) l<span class="op">++</span>;
+        <span class="kw">else</span> r<span class="op">--</span>;
+    }
+}</pre>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #56</span>
+        <span class="q-title">Merge Intervals</span>
+        <span class="q-diff diff-medium">Medium</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Merge all overlapping intervals and return an array of non-overlapping intervals.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="type">Arrays</span>.<span class="fn">sort</span>(intervals, (a, b) <span class="op">-></span> a[<span class="num-lit">0</span>] <span class="op">-</span> b[<span class="num-lit">0</span>]);
+<span class="type">List</span>&lt;<span class="kw">int</span>[]&gt; res = <span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;();
+<span class="kw">int</span>[] curr = intervals[<span class="num-lit">0</span>];
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num-lit">1</span>; i &lt; intervals.length; i++) {
+    <span class="kw">if</span> (curr[<span class="num-lit">1</span>] &gt;= intervals[i][<span class="num-lit">0</span>])
+        curr[<span class="num-lit">1</span>] = <span class="type">Math</span>.<span class="fn">max</span>(curr[<span class="num-lit">1</span>], intervals[i][<span class="num-lit">1</span>]);
+    <span class="kw">else</span> { res.<span class="fn">add</span>(curr); curr = intervals[i]; }
+}
+res.<span class="fn">add</span>(curr);
+<span class="kw">return</span> res.<span class="fn">toArray</span>(<span class="kw">new int</span>[res.size()][]);</pre>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #11</span>
+        <span class="q-title">Container With Most Water</span>
+        <span class="q-diff diff-medium">Medium</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Find two lines that form a container that holds the most water.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="kw">int</span> l = <span class="num-lit">0</span>, r = height.length<span class="op">-</span><span class="num-lit">1</span>, max = <span class="num-lit">0</span>;
+<span class="kw">while</span> (l &lt; r) {
+    max = <span class="type">Math</span>.<span class="fn">max</span>(max, (r<span class="op">-</span>l) <span class="op">*</span> <span class="type">Math</span>.<span class="fn">min</span>(height[l], height[r]));
+    <span class="kw">if</span> (height[l] &lt; height[r]) l<span class="op">++</span>;
+    <span class="kw">else</span> r<span class="op">--</span>;
+}
+<span class="kw">return</span> max;</pre>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header">
+        <span class="q-num">LC #48</span>
+        <span class="q-title">Rotate Image</span>
+        <span class="q-diff diff-medium">Medium</span>
+        <span class="q-toggle">▼</span>
+      </div>
+      <div class="q-body">
+        <div class="q-problem">Rotate an n×n matrix 90 degrees clockwise in-place.</div>
+        <div class="code-label">Java Solution</div>
+        <pre><span class="cm">// Step 1: Transpose</span>
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num-lit">0</span>; i &lt; n; i++)
+    <span class="kw">for</span> (<span class="kw">int</span> j = i; j &lt; n; j++)
+        <span class="fn">swap</span>(matrix, i, j, j, i);
+<span class="cm">// Step 2: Reverse each row</span>
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num-lit">0</span>; i &lt; n; i++)
+    <span class="kw">for</span> (<span class="kw">int</span> j = <span class="num-lit">0</span>, k = n<span class="op">-</span><span class="num-lit">1</span>; j &lt; k; j<span class="op">++</span>, k<span class="op">--</span>)
+        <span class="fn">swap</span>(matrix, i, j, i, k);</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. STRINGS -->
+  <section class="category theme-cyan" id="strings">
+    <div class="section-header">
+      <div class="section-icon">📝</div>
+      <div class="section-title">Strings</div>
+      <div class="section-count">10 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #20</span><span class="q-title">Valid Parentheses</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">Stack</span>&lt;<span class="type">Character</span>&gt; st = <span class="kw">new</span> <span class="fn">Stack</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">char</span> c : s.<span class="fn">toCharArray</span>()) {
+    <span class="kw">if</span> (c == <span class="str">'('</span> || c == <span class="str">'{'</span> || c == <span class="str">'['</span>) st.<span class="fn">push</span>(c);
+    <span class="kw">else if</span> (st.<span class="fn">isEmpty</span>() ||
+        (c == <span class="str">')'</span> &amp;&amp; st.<span class="fn">pop</span>() != <span class="str">'('</span>) ||
+        (c == <span class="str">'}'</span> &amp;&amp; st.<span class="fn">pop</span>() != <span class="str">'{'</span>) ||
+        (c == <span class="str">']'</span> &amp;&amp; st.<span class="fn">pop</span>() != <span class="str">'['</span>)) <span class="kw">return false</span>;
+}
+<span class="kw">return</span> st.<span class="fn">isEmpty</span>();</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #125</span><span class="q-title">Valid Palindrome</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> i = <span class="num-lit">0</span>, j = s.<span class="fn">length</span>() <span class="op">-</span> <span class="num-lit">1</span>;
+<span class="kw">while</span> (i &lt; j) {
+    <span class="kw">while</span> (i &lt; j &amp;&amp; !<span class="type">Character</span>.<span class="fn">isLetterOrDigit</span>(s.<span class="fn">charAt</span>(i))) i<span class="op">++</span>;
+    <span class="kw">while</span> (i &lt; j &amp;&amp; !<span class="type">Character</span>.<span class="fn">isLetterOrDigit</span>(s.<span class="fn">charAt</span>(j))) j<span class="op">--</span>;
+    <span class="kw">if</span> (<span class="type">Character</span>.<span class="fn">toLowerCase</span>(s.<span class="fn">charAt</span>(i<span class="op">++</span>)) != <span class="type">Character</span>.<span class="fn">toLowerCase</span>(s.<span class="fn">charAt</span>(j<span class="op">--</span>)))
+        <span class="kw">return false</span>;
+}
+<span class="kw">return true</span>;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #242</span><span class="q-title">Valid Anagram</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span>[] freq = <span class="kw">new int</span>[<span class="num-lit">26</span>];
+<span class="kw">for</span> (<span class="kw">char</span> c : s.<span class="fn">toCharArray</span>()) freq[c <span class="op">-</span> <span class="str">'a'</span>]<span class="op">++</span>;
+<span class="kw">for</span> (<span class="kw">char</span> c : t.<span class="fn">toCharArray</span>()) freq[c <span class="op">-</span> <span class="str">'a'</span>]<span class="op">--</span>;
+<span class="kw">for</span> (<span class="kw">int</span> f : freq) <span class="kw">if</span> (f != <span class="num-lit">0</span>) <span class="kw">return false</span>;
+<span class="kw">return true</span>;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #49</span><span class="q-title">Group Anagrams</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">List</span>&lt;<span class="type">String</span>&gt;&gt; map = <span class="kw">new</span> <span class="fn">HashMap</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="type">String</span> str : strs) {
+    <span class="kw">char</span>[] arr = str.<span class="fn">toCharArray</span>();
+    <span class="type">Arrays</span>.<span class="fn">sort</span>(arr);
+    <span class="type">String</span> key = <span class="kw">new</span> <span class="fn">String</span>(arr);
+    map.<span class="fn">computeIfAbsent</span>(key, k <span class="op">-></span> <span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;()).<span class="fn">add</span>(str);
+}
+<span class="kw">return new</span> <span class="fn">ArrayList</span>&lt;&gt;(map.<span class="fn">values</span>());</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #5</span><span class="q-title">Longest Palindromic Substring</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Expand around center — check both odd and even length palindromes.</div><div class="code-label">Java Solution</div><pre><span class="kw">int</span> start = <span class="num-lit">0</span>, end = <span class="num-lit">0</span>;
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num-lit">0</span>; i &lt; s.<span class="fn">length</span>(); i++) {
+    <span class="kw">int</span> len = <span class="type">Math</span>.<span class="fn">max</span>(<span class="fn">expand</span>(s,i,i), <span class="fn">expand</span>(s,i,i<span class="op">+</span><span class="num-lit">1</span>));
+    <span class="kw">if</span> (len &gt; end <span class="op">-</span> start) {
+        start = i <span class="op">-</span> (len<span class="op">-</span><span class="num-lit">1</span>) <span class="op">/</span> <span class="num-lit">2</span>;
+        end   = i <span class="op">+</span> len <span class="op">/</span> <span class="num-lit">2</span>;
+    }
+}
+<span class="kw">return</span> s.<span class="fn">substring</span>(start, end<span class="op">+</span><span class="num-lit">1</span>);</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #76</span><span class="q-title">Minimum Window Substring</span><span class="q-diff diff-hard">Hard</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Find the smallest substring of s that contains all characters of t. Sliding window approach.</div><div class="code-label">Java Solution</div><pre><span class="type">Map</span>&lt;<span class="type">Character</span>,<span class="type">Integer</span>&gt; need = <span class="kw">new</span> <span class="fn">HashMap</span>&lt;&gt;(), window = <span class="kw">new</span> <span class="fn">HashMap</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">char</span> c : t.<span class="fn">toCharArray</span>()) need.<span class="fn">put</span>(c, need.<span class="fn">getOrDefault</span>(c,<span class="num-lit">0</span>)<span class="op">+</span><span class="num-lit">1</span>);
+<span class="kw">int</span> have=<span class="num-lit">0</span>, need2=need.<span class="fn">size</span>(), left=<span class="num-lit">0</span>, minLen=<span class="type">Integer</span>.MAX_VALUE, start=<span class="num-lit">0</span>;
+<span class="kw">for</span> (<span class="kw">int</span> r=<span class="num-lit">0</span>; r&lt;s.<span class="fn">length</span>(); r++) {
+    <span class="kw">char</span> c = s.<span class="fn">charAt</span>(r);
+    window.<span class="fn">put</span>(c, window.<span class="fn">getOrDefault</span>(c,<span class="num-lit">0</span>)<span class="op">+</span><span class="num-lit">1</span>);
+    <span class="kw">if</span> (need.<span class="fn">containsKey</span>(c) &amp;&amp; window.<span class="fn">get</span>(c).<span class="fn">equals</span>(need.<span class="fn">get</span>(c))) have<span class="op">++</span>;
+    <span class="kw">while</span> (have==need2) {
+        <span class="kw">if</span> (r<span class="op">-</span>left<span class="op">+</span><span class="num-lit">1</span>&lt;minLen) { minLen=r<span class="op">-</span>left<span class="op">+</span><span class="num-lit">1</span>; start=left; }
+        <span class="kw">char</span> d=s.<span class="fn">charAt</span>(left<span class="op">++</span>);
+        window.<span class="fn">put</span>(d, window.<span class="fn">get</span>(d)<span class="op">-</span><span class="num-lit">1</span>);
+        <span class="kw">if</span> (need.<span class="fn">containsKey</span>(d)&amp;&amp;window.<span class="fn">get</span>(d)&lt;need.<span class="fn">get</span>(d)) have<span class="op">--</span>;
+    }
+}
+<span class="kw">return</span> minLen==<span class="type">Integer</span>.MAX_VALUE ? <span class="str">""</span> : s.<span class="fn">substring</span>(start, start<span class="op">+</span>minLen);</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #28</span><span class="q-title">Find First Occurrence in String</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;=haystack.<span class="fn">length</span>()<span class="op">-</span>needle.<span class="fn">length</span>(); i++)
+    <span class="kw">if</span> (haystack.<span class="fn">substring</span>(i, i<span class="op">+</span>needle.<span class="fn">length</span>()).<span class="fn">equals</span>(needle)) <span class="kw">return</span> i;
+<span class="kw">return</span> <span class="num-lit">-1</span>;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #443</span><span class="q-title">String Compression</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> i=<span class="num-lit">0</span>, idx=<span class="num-lit">0</span>;
+<span class="kw">while</span> (i &lt; chars.length) {
+    <span class="kw">char</span> c = chars[i]; <span class="kw">int</span> count=<span class="num-lit">0</span>;
+    <span class="kw">while</span> (i &lt; chars.length &amp;&amp; chars[i]==c) { i<span class="op">++</span>; count<span class="op">++</span>; }
+    chars[idx<span class="op">++</span>] = c;
+    <span class="kw">if</span> (count &gt; <span class="num-lit">1</span>)
+        <span class="kw">for</span> (<span class="kw">char</span> ch : <span class="type">String</span>.<span class="fn">valueOf</span>(count).<span class="fn">toCharArray</span>()) chars[idx<span class="op">++</span>]=ch;
+}
+<span class="kw">return</span> idx;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #14</span><span class="q-title">Longest Common Prefix</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">String</span> prefix = strs[<span class="num-lit">0</span>];
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">1</span>; i&lt;strs.length; i++) {
+    <span class="kw">while</span> (!strs[i].<span class="fn">startsWith</span>(prefix)) {
+        prefix = prefix.<span class="fn">substring</span>(<span class="num-lit">0</span>, prefix.<span class="fn">length</span>()<span class="op">-</span><span class="num-lit">1</span>);
+        <span class="kw">if</span> (prefix.<span class="fn">isEmpty</span>()) <span class="kw">return</span> <span class="str">""</span>;
+    }
+}
+<span class="kw">return</span> prefix;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #459</span><span class="q-title">Repeated Substring Pattern</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">String</span> str = s <span class="op">+</span> s;
+<span class="kw">return</span> str.<span class="fn">substring</span>(<span class="num-lit">1</span>, str.<span class="fn">length</span>()<span class="op">-</span><span class="num-lit">1</span>).<span class="fn">contains</span>(s);</pre></div>
+    </div>
+  </section>
+
+  <!-- 3. LINKED LISTS -->
+  <section class="category theme-amber" id="linked-lists">
+    <div class="section-header">
+      <div class="section-icon">🔗</div>
+      <div class="section-title">Linked Lists</div>
+      <div class="section-count">8 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #206</span><span class="q-title">Reverse Linked List</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">ListNode</span> prev=<span class="kw">null</span>, curr=head;
+<span class="kw">while</span> (curr!=<span class="kw">null</span>) {
+    <span class="type">ListNode</span> next=curr.next; curr.next=prev; prev=curr; curr=next;
+}
+<span class="kw">return</span> prev;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #21</span><span class="q-title">Merge Two Sorted Lists</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">ListNode</span> dummy=<span class="kw">new</span> <span class="fn">ListNode</span>(<span class="num-lit">0</span>), tail=dummy;
+<span class="kw">while</span> (l1!=<span class="kw">null</span>&amp;&amp;l2!=<span class="kw">null</span>) {
+    <span class="kw">if</span> (l1.val&lt;l2.val) { tail.next=l1; l1=l1.next; }
+    <span class="kw">else</span> { tail.next=l2; l2=l2.next; }
+    tail=tail.next;
+}
+tail.next=(l1!=<span class="kw">null</span>)?l1:l2;
+<span class="kw">return</span> dummy.next;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #19</span><span class="q-title">Remove Nth Node From End</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Two-pointer technique: advance fast pointer n+1 steps ahead, then move both until fast reaches end.</div><div class="code-label">Java Solution</div><pre><span class="type">ListNode</span> dummy=<span class="kw">new</span> <span class="fn">ListNode</span>(<span class="num-lit">0</span>); dummy.next=head;
+<span class="type">ListNode</span> fast=dummy, slow=dummy;
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;=n; i++) fast=fast.next;
+<span class="kw">while</span> (fast!=<span class="kw">null</span>) { fast=fast.next; slow=slow.next; }
+slow.next=slow.next.next;
+<span class="kw">return</span> dummy.next;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #141</span><span class="q-title">Linked List Cycle</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Floyd's tortoise and hare — fast pointer moves 2x, if there's a cycle they meet.</div><div class="code-label">Java Solution</div><pre><span class="type">ListNode</span> slow=head, fast=head;
+<span class="kw">while</span> (fast!=<span class="kw">null</span>&amp;&amp;fast.next!=<span class="kw">null</span>) {
+    slow=slow.next; fast=fast.next.next;
+    <span class="kw">if</span> (slow==fast) <span class="kw">return true</span>;
+}
+<span class="kw">return false</span>;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #2</span><span class="q-title">Add Two Numbers</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">ListNode</span> dummy=<span class="kw">new</span> <span class="fn">ListNode</span>(<span class="num-lit">0</span>), curr=dummy;
+<span class="kw">int</span> carry=<span class="num-lit">0</span>;
+<span class="kw">while</span> (l1!=<span class="kw">null</span>||l2!=<span class="kw">null</span>||carry!=<span class="num-lit">0</span>) {
+    <span class="kw">int</span> sum=carry;
+    <span class="kw">if</span> (l1!=<span class="kw">null</span>) { sum+=l1.val; l1=l1.next; }
+    <span class="kw">if</span> (l2!=<span class="kw">null</span>) { sum+=l2.val; l2=l2.next; }
+    carry=sum/<span class="num-lit">10</span>; curr.next=<span class="kw">new</span> <span class="fn">ListNode</span>(sum%<span class="num-lit">10</span>); curr=curr.next;
+}
+<span class="kw">return</span> dummy.next;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #160</span><span class="q-title">Intersection of Two Linked Lists</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">ListNode</span> a=headA, b=headB;
+<span class="kw">while</span> (a!=b) {
+    a=(a==<span class="kw">null</span>)?headB:a.next;
+    b=(b==<span class="kw">null</span>)?headA:b.next;
+}
+<span class="kw">return</span> a;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #234</span><span class="q-title">Palindrome Linked List</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Find mid with slow/fast pointers, reverse second half, then compare.</div><div class="code-label">Java Solution</div><pre><span class="type">ListNode</span> slow=head, fast=head;
+<span class="kw">while</span> (fast!=<span class="kw">null</span>&amp;&amp;fast.next!=<span class="kw">null</span>) { slow=slow.next; fast=fast.next.next; }
+<span class="type">ListNode</span> prev=<span class="kw">null</span>, curr=slow;
+<span class="kw">while</span> (curr!=<span class="kw">null</span>) { <span class="type">ListNode</span> next=curr.next; curr.next=prev; prev=curr; curr=next; }
+<span class="type">ListNode</span> left=head, right=prev;
+<span class="kw">while</span> (right!=<span class="kw">null</span>) {
+    <span class="kw">if</span> (left.val!=right.val) <span class="kw">return false</span>;
+    left=left.next; right=right.next;
+}
+<span class="kw">return true</span>;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #25</span><span class="q-title">Reverse Nodes in k-Group</span><span class="q-diff diff-hard">Hard</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Reverse every k nodes in the linked list. Leave remaining nodes unchanged if fewer than k.</div><div class="code-label">Java Solution</div><pre><span class="type">ListNode</span> dummy=<span class="kw">new</span> <span class="fn">ListNode</span>(<span class="num-lit">0</span>); dummy.next=head;
+<span class="type">ListNode</span> pre=dummy, end=dummy;
+<span class="kw">while</span> (<span class="kw">true</span>) {
+    <span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;k&amp;&amp;end!=<span class="kw">null</span>; i++) end=end.next;
+    <span class="kw">if</span> (end==<span class="kw">null</span>) <span class="kw">break</span>;
+    <span class="type">ListNode</span> start=pre.next, next=end.next;
+    end.next=<span class="kw">null</span>;
+    pre.next=<span class="fn">reverse</span>(start);
+    start.next=next; pre=start; end=pre;
+}</pre></div>
+    </div>
+  </section>
+
+  <!-- 4. STACKS & QUEUES -->
+  <section class="category theme-green" id="stacks">
+    <div class="section-header">
+      <div class="section-icon">📚</div>
+      <div class="section-title">Stacks & Queues</div>
+      <div class="section-count">8 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #155</span><span class="q-title">Min Stack</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">Stack</span>&lt;<span class="type">Integer</span>&gt; st=<span class="kw">new</span> <span class="fn">Stack</span>&lt;&gt;(), minSt=<span class="kw">new</span> <span class="fn">Stack</span>&lt;&gt;();
+<span class="kw">void</span> <span class="fn">push</span>(<span class="kw">int</span> x) {
+    st.<span class="fn">push</span>(x);
+    <span class="kw">if</span> (minSt.<span class="fn">isEmpty</span>()||x&lt;=minSt.<span class="fn">peek</span>()) minSt.<span class="fn">push</span>(x);
+}
+<span class="kw">void</span> <span class="fn">pop</span>() { <span class="kw">if</span> (st.<span class="fn">pop</span>().<span class="fn">equals</span>(minSt.<span class="fn">peek</span>())) minSt.<span class="fn">pop</span>(); }
+<span class="kw">int</span> <span class="fn">getMin</span>() { <span class="kw">return</span> minSt.<span class="fn">peek</span>(); }</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #739</span><span class="q-title">Daily Temperatures</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span>[] res=<span class="kw">new int</span>[temps.length];
+<span class="type">Stack</span>&lt;<span class="type">Integer</span>&gt; st=<span class="kw">new</span> <span class="fn">Stack</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;temps.length; i++) {
+    <span class="kw">while</span> (!st.<span class="fn">isEmpty</span>()&amp;&amp;temps[i]&gt;temps[st.<span class="fn">peek</span>()]) {
+        <span class="kw">int</span> idx=st.<span class="fn">pop</span>(); res[idx]=i<span class="op">-</span>idx;
+    }
+    st.<span class="fn">push</span>(i);
+}
+<span class="kw">return</span> res;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #150</span><span class="q-title">Evaluate Reverse Polish Notation</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">Stack</span>&lt;<span class="type">Integer</span>&gt; st=<span class="kw">new</span> <span class="fn">Stack</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="type">String</span> t : tokens) {
+    <span class="kw">if</span> (<span class="str">"+-*/"</span>.<span class="fn">contains</span>(t)) {
+        <span class="kw">int</span> b=st.<span class="fn">pop</span>(), a=st.<span class="fn">pop</span>();
+        <span class="kw">switch</span>(t) {
+            <span class="kw">case</span> <span class="str">"+"</span>: st.<span class="fn">push</span>(a<span class="op">+</span>b); <span class="kw">break</span>;
+            <span class="kw">case</span> <span class="str">"-"</span>: st.<span class="fn">push</span>(a<span class="op">-</span>b); <span class="kw">break</span>;
+            <span class="kw">case</span> <span class="str">"*"</span>: st.<span class="fn">push</span>(a<span class="op">*</span>b); <span class="kw">break</span>;
+            <span class="kw">case</span> <span class="str">"/"</span>: st.<span class="fn">push</span>(a<span class="op">/</span>b); <span class="kw">break</span>;
+        }
+    } <span class="kw">else</span> st.<span class="fn">push</span>(<span class="type">Integer</span>.<span class="fn">parseInt</span>(t));
+}
+<span class="kw">return</span> st.<span class="fn">pop</span>();</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #496</span><span class="q-title">Next Greater Element I</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">Map</span>&lt;<span class="type">Integer</span>,<span class="type">Integer</span>&gt; map=<span class="kw">new</span> <span class="fn">HashMap</span>&lt;&gt;();
+<span class="type">Stack</span>&lt;<span class="type">Integer</span>&gt; st=<span class="kw">new</span> <span class="fn">Stack</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">int</span> n:nums2) {
+    <span class="kw">while</span> (!st.<span class="fn">isEmpty</span>()&amp;&amp;st.<span class="fn">peek</span>()&lt;n) map.<span class="fn">put</span>(st.<span class="fn">pop</span>(),n);
+    st.<span class="fn">push</span>(n);
+}
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;nums1.length; i++) nums1[i]=map.<span class="fn">getOrDefault</span>(nums1[i],<span class="num-lit">-1</span>);
+<span class="kw">return</span> nums1;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #503</span><span class="q-title">Next Greater Element II</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Circular array — iterate twice using modulo.</div><div class="code-label">Java Solution</div><pre><span class="kw">int</span> n=nums.length; <span class="kw">int</span>[] res=<span class="kw">new int</span>[n]; <span class="type">Arrays</span>.<span class="fn">fill</span>(res,<span class="num-lit">-1</span>);
+<span class="type">Stack</span>&lt;<span class="type">Integer</span>&gt; st=<span class="kw">new</span> <span class="fn">Stack</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;<span class="num-lit">2</span><span class="op">*</span>n; i++) {
+    <span class="kw">int</span> num=nums[i%n];
+    <span class="kw">while</span> (!st.<span class="fn">isEmpty</span>()&amp;&amp;nums[st.<span class="fn">peek</span>()]&lt;num) res[st.<span class="fn">pop</span>()]=num;
+    <span class="kw">if</span> (i&lt;n) st.<span class="fn">push</span>(i);
+}
+<span class="kw">return</span> res;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #622</span><span class="q-title">Circular Queue</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span>[] q; <span class="kw">int</span> front=<span class="num-lit">0</span>, rear=<span class="num-lit">-1</span>, size=<span class="num-lit">0</span>, cap;
+<span class="fn">MyCircularQueue</span>(<span class="kw">int</span> k) { q=<span class="kw">new int</span>[k]; cap=k; }
+<span class="kw">boolean</span> <span class="fn">enQueue</span>(<span class="kw">int</span> val) {
+    <span class="kw">if</span> (<span class="fn">isFull</span>()) <span class="kw">return false</span>;
+    rear=(rear<span class="op">+</span><span class="num-lit">1</span>)%cap; q[rear]=val; size<span class="op">++</span>; <span class="kw">return true</span>;
+}
+<span class="kw">boolean</span> <span class="fn">deQueue</span>() {
+    <span class="kw">if</span> (<span class="fn">isEmpty</span>()) <span class="kw">return false</span>;
+    front=(front<span class="op">+</span><span class="num-lit">1</span>)%cap; size<span class="op">--</span>; <span class="kw">return true</span>;
+}
+<span class="kw">int</span> <span class="fn">Front</span>() { <span class="kw">return</span> <span class="fn">isEmpty</span>()?<span class="num-lit">-1</span>:q[front]; }
+<span class="kw">int</span> <span class="fn">Rear</span>() { <span class="kw">return</span> <span class="fn">isEmpty</span>()?<span class="num-lit">-1</span>:q[rear]; }</pre></div>
+    </div>
+  </section>
+
+  <!-- 5. BINARY SEARCH -->
+  <section class="category theme-pink" id="binary-search">
+    <div class="section-header">
+      <div class="section-icon">🔍</div>
+      <div class="section-title">Binary Search</div>
+      <div class="section-count">6 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #704</span><span class="q-title">Binary Search</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> l=<span class="num-lit">0</span>, r=nums.length<span class="op">-</span><span class="num-lit">1</span>;
+<span class="kw">while</span> (l&lt;=r) {
+    <span class="kw">int</span> mid=l<span class="op">+</span>(r<span class="op">-</span>l)/<span class="num-lit">2</span>;
+    <span class="kw">if</span> (nums[mid]==target) <span class="kw">return</span> mid;
+    <span class="kw">else if</span> (nums[mid]&lt;target) l=mid<span class="op">+</span><span class="num-lit">1</span>;
+    <span class="kw">else</span> r=mid<span class="op">-</span><span class="num-lit">1</span>;
+}
+<span class="kw">return</span> <span class="num-lit">-1</span>;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #74</span><span class="q-title">Search a 2D Matrix</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Treat the matrix as a flattened sorted array — map mid index to row/col using division and modulo.</div><div class="code-label">Java Solution</div><pre><span class="kw">int</span> m=mat.length, n=mat[<span class="num-lit">0</span>].length, l=<span class="num-lit">0</span>, r=m<span class="op">*</span>n<span class="op">-</span><span class="num-lit">1</span>;
+<span class="kw">while</span> (l&lt;=r) {
+    <span class="kw">int</span> mid=l<span class="op">+</span>(r<span class="op">-</span>l)/<span class="num-lit">2</span>, val=mat[mid/n][mid%n];
+    <span class="kw">if</span> (val==target) <span class="kw">return true</span>;
+    <span class="kw">else if</span> (val&lt;target) l=mid<span class="op">+</span><span class="num-lit">1</span>;
+    <span class="kw">else</span> r=mid<span class="op">-</span><span class="num-lit">1</span>;
+}
+<span class="kw">return false</span>;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #33</span><span class="q-title">Search in Rotated Sorted Array</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> l=<span class="num-lit">0</span>, r=nums.length<span class="op">-</span><span class="num-lit">1</span>;
+<span class="kw">while</span> (l&lt;=r) {
+    <span class="kw">int</span> m=l<span class="op">+</span>(r<span class="op">-</span>l)/<span class="num-lit">2</span>;
+    <span class="kw">if</span> (nums[m]==target) <span class="kw">return</span> m;
+    <span class="kw">if</span> (nums[l]&lt;=nums[m]) {
+        <span class="kw">if</span> (target&gt;=nums[l]&amp;&amp;target&lt;nums[m]) r=m<span class="op">-</span><span class="num-lit">1</span>; <span class="kw">else</span> l=m<span class="op">+</span><span class="num-lit">1</span>;
+    } <span class="kw">else</span> {
+        <span class="kw">if</span> (target&gt;nums[m]&amp;&amp;target&lt;=nums[r]) l=m<span class="op">+</span><span class="num-lit">1</span>; <span class="kw">else</span> r=m<span class="op">-</span><span class="num-lit">1</span>;
+    }
+}
+<span class="kw">return</span> <span class="num-lit">-1</span>;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #162</span><span class="q-title">Find Peak Element</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> l=<span class="num-lit">0</span>, r=nums.length<span class="op">-</span><span class="num-lit">1</span>;
+<span class="kw">while</span> (l&lt;r) {
+    <span class="kw">int</span> m=l<span class="op">+</span>(r<span class="op">-</span>l)/<span class="num-lit">2</span>;
+    <span class="kw">if</span> (nums[m]&gt;nums[m<span class="op">+</span><span class="num-lit">1</span>]) r=m; <span class="kw">else</span> l=m<span class="op">+</span><span class="num-lit">1</span>;
+}
+<span class="kw">return</span> l;</pre></div>
+    </div>
+  </section>
+
+  <!-- 6. TREES -->
+  <section class="category theme-blue" id="trees">
+    <div class="section-header">
+      <div class="section-icon">🌳</div>
+      <div class="section-title">Trees</div>
+      <div class="section-count">8 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #104</span><span class="q-title">Maximum Depth of Binary Tree</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> <span class="fn">maxDepth</span>(<span class="type">TreeNode</span> root) {
+    <span class="kw">if</span> (root==<span class="kw">null</span>) <span class="kw">return</span> <span class="num-lit">0</span>;
+    <span class="kw">return</span> <span class="num-lit">1</span> <span class="op">+</span> <span class="type">Math</span>.<span class="fn">max</span>(<span class="fn">maxDepth</span>(root.left), <span class="fn">maxDepth</span>(root.right));
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #100</span><span class="q-title">Same Tree</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">boolean</span> <span class="fn">isSameTree</span>(<span class="type">TreeNode</span> p, <span class="type">TreeNode</span> q) {
+    <span class="kw">if</span> (p==<span class="kw">null</span>&amp;&amp;q==<span class="kw">null</span>) <span class="kw">return true</span>;
+    <span class="kw">if</span> (p==<span class="kw">null</span>||q==<span class="kw">null</span>||p.val!=q.val) <span class="kw">return false</span>;
+    <span class="kw">return</span> <span class="fn">isSameTree</span>(p.left,q.left)&amp;&amp;<span class="fn">isSameTree</span>(p.right,q.right);
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #101</span><span class="q-title">Symmetric Tree</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">boolean</span> <span class="fn">isMirror</span>(<span class="type">TreeNode</span> a, <span class="type">TreeNode</span> b) {
+    <span class="kw">if</span> (a==<span class="kw">null</span>&amp;&amp;b==<span class="kw">null</span>) <span class="kw">return true</span>;
+    <span class="kw">if</span> (a==<span class="kw">null</span>||b==<span class="kw">null</span>||a.val!=b.val) <span class="kw">return false</span>;
+    <span class="kw">return</span> <span class="fn">isMirror</span>(a.left,b.right)&amp;&amp;<span class="fn">isMirror</span>(a.right,b.left);
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #102</span><span class="q-title">Binary Tree Level Order Traversal</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="type">Queue</span>&lt;<span class="type">TreeNode</span>&gt; q=<span class="kw">new</span> <span class="fn">LinkedList</span>&lt;&gt;(); q.<span class="fn">add</span>(root);
+<span class="kw">while</span> (!q.<span class="fn">isEmpty</span>()) {
+    <span class="kw">int</span> size=q.<span class="fn">size</span>();
+    <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; level=<span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;();
+    <span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;size; i++) {
+        <span class="type">TreeNode</span> node=q.<span class="fn">poll</span>();
+        level.<span class="fn">add</span>(node.val);
+        <span class="kw">if</span> (node.left!=<span class="kw">null</span>) q.<span class="fn">add</span>(node.left);
+        <span class="kw">if</span> (node.right!=<span class="kw">null</span>) q.<span class="fn">add</span>(node.right);
+    }
+    res.<span class="fn">add</span>(level);
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #110</span><span class="q-title">Balanced Binary Tree</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> <span class="fn">height</span>(<span class="type">TreeNode</span> node) {
+    <span class="kw">if</span> (node==<span class="kw">null</span>) <span class="kw">return</span> <span class="num-lit">0</span>;
+    <span class="kw">int</span> l=<span class="fn">height</span>(node.left), r=<span class="fn">height</span>(node.right);
+    <span class="kw">if</span> (l==<span class="num-lit">-1</span>||r==<span class="num-lit">-1</span>||<span class="type">Math</span>.<span class="fn">abs</span>(l<span class="op">-</span>r)&gt;<span class="num-lit">1</span>) <span class="kw">return</span> <span class="num-lit">-1</span>;
+    <span class="kw">return</span> <span class="num-lit">1</span><span class="op">+</span><span class="type">Math</span>.<span class="fn">max</span>(l,r);
+}</pre></div>
+    </div>
+  </section>
+
+  <!-- 7. BACKTRACKING -->
+  <section class="category theme-orange" id="backtracking">
+    <div class="section-header">
+      <div class="section-icon">🔄</div>
+      <div class="section-title">Recursion & Backtracking</div>
+      <div class="section-count">7 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #39</span><span class="q-title">Combination Sum</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">void</span> <span class="fn">backtrack</span>(<span class="kw">int</span>[] nums, <span class="kw">int</span> target, <span class="kw">int</span> start, <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; curr, <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; res) {
+    <span class="kw">if</span> (target==<span class="num-lit">0</span>) { res.<span class="fn">add</span>(<span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;(curr)); <span class="kw">return</span>; }
+    <span class="kw">if</span> (target&lt;<span class="num-lit">0</span>) <span class="kw">return</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> i=start; i&lt;nums.length; i++) {
+        curr.<span class="fn">add</span>(nums[i]);
+        <span class="fn">backtrack</span>(nums, target<span class="op">-</span>nums[i], i, curr, res);
+        curr.<span class="fn">remove</span>(curr.<span class="fn">size</span>()<span class="op">-</span><span class="num-lit">1</span>);
+    }
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #46</span><span class="q-title">Permutations</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">void</span> <span class="fn">backtrack</span>(<span class="kw">int</span>[] nums, <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; curr, <span class="kw">boolean</span>[] used, <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; res) {
+    <span class="kw">if</span> (curr.<span class="fn">size</span>()==nums.length) { res.<span class="fn">add</span>(<span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;(curr)); <span class="kw">return</span>; }
+    <span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;nums.length; i++) {
+        <span class="kw">if</span> (used[i]) <span class="kw">continue</span>;
+        used[i]=<span class="kw">true</span>; curr.<span class="fn">add</span>(nums[i]);
+        <span class="fn">backtrack</span>(nums,curr,used,res);
+        curr.<span class="fn">remove</span>(curr.<span class="fn">size</span>()<span class="op">-</span><span class="num-lit">1</span>); used[i]=<span class="kw">false</span>;
+    }
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #78</span><span class="q-title">Subsets</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">void</span> <span class="fn">backtrack</span>(<span class="kw">int</span>[] nums, <span class="kw">int</span> start, <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; curr, <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; res) {
+    res.<span class="fn">add</span>(<span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;(curr));
+    <span class="kw">for</span> (<span class="kw">int</span> i=start; i&lt;nums.length; i++) {
+        curr.<span class="fn">add</span>(nums[i]);
+        <span class="fn">backtrack</span>(nums,i<span class="op">+</span><span class="num-lit">1</span>,curr,res);
+        curr.<span class="fn">remove</span>(curr.<span class="fn">size</span>()<span class="op">-</span><span class="num-lit">1</span>);
+    }
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #51</span><span class="q-title">N-Queens</span><span class="q-diff diff-hard">Hard</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Place N queens on N×N board so no two queens attack each other. Track columns and both diagonals.</div><div class="code-label">Java Solution</div><pre><span class="kw">for</span> (<span class="kw">int</span> c=<span class="num-lit">0</span>; c&lt;n; c++) {
+    <span class="kw">if</span> (col[c]||d1[row<span class="op">-</span>c<span class="op">+</span>n]||d2[row<span class="op">+</span>c]) <span class="kw">continue</span>;
+    board[row][c]=<span class="str">'Q'</span>;
+    col[c]=d1[row<span class="op">-</span>c<span class="op">+</span>n]=d2[row<span class="op">+</span>c]=<span class="kw">true</span>;
+    <span class="fn">solve</span>(n,row<span class="op">+</span><span class="num-lit">1</span>,board,res,col,d1,d2);
+    board[row][c]=<span class="str">'.'</span>;
+    col[c]=d1[row<span class="op">-</span>c<span class="op">+</span>n]=d2[row<span class="op">+</span>c]=<span class="kw">false</span>;
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #37</span><span class="q-title">Sudoku Solver</span><span class="q-diff diff-hard">Hard</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">boolean</span> <span class="fn">solve</span>(<span class="kw">char</span>[][] board) {
+    <span class="kw">for</span> (<span class="kw">int</span> r=<span class="num-lit">0</span>; r&lt;<span class="num-lit">9</span>; r++)
+        <span class="kw">for</span> (<span class="kw">int</span> c=<span class="num-lit">0</span>; c&lt;<span class="num-lit">9</span>; c++) {
+            <span class="kw">if</span> (board[r][c]==<span class="str">'.'</span>) {
+                <span class="kw">for</span> (<span class="kw">char</span> ch=<span class="str">'1'</span>; ch&lt;=<span class="str">'9'</span>; ch++) {
+                    <span class="kw">if</span> (<span class="fn">isValid</span>(board,r,c,ch)) {
+                        board[r][c]=ch;
+                        <span class="kw">if</span> (<span class="fn">solve</span>(board)) <span class="kw">return true</span>;
+                        board[r][c]=<span class="str">'.'</span>;
+                    }
+                }
+                <span class="kw">return false</span>;
+            }
+        }
+    <span class="kw">return true</span>;
+}</pre></div>
+    </div>
+  </section>
+
+  <!-- 8. DP -->
+  <section class="category theme-teal" id="dp">
+    <div class="section-header">
+      <div class="section-icon">⚡</div>
+      <div class="section-title">Dynamic Programming</div>
+      <div class="section-count">10 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #70</span><span class="q-title">Climbing Stairs</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> a=<span class="num-lit">1</span>, b=<span class="num-lit">2</span>;
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">3</span>; i&lt;=n; i++) { <span class="kw">int</span> c=a<span class="op">+</span>b; a=b; b=c; }
+<span class="kw">return</span> n&lt;=<span class="num-lit">2</span> ? n : b;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #198</span><span class="q-title">House Robber</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> prev=<span class="num-lit">0</span>, curr=<span class="num-lit">0</span>;
+<span class="kw">for</span> (<span class="kw">int</span> n : nums) {
+    <span class="kw">int</span> temp=<span class="type">Math</span>.<span class="fn">max</span>(curr, prev<span class="op">+</span>n);
+    prev=curr; curr=temp;
+}
+<span class="kw">return</span> curr;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #322</span><span class="q-title">Coin Change</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span>[] dp=<span class="kw">new int</span>[amount<span class="op">+</span><span class="num-lit">1</span>];
+<span class="type">Arrays</span>.<span class="fn">fill</span>(dp, amount<span class="op">+</span><span class="num-lit">1</span>); dp[<span class="num-lit">0</span>]=<span class="num-lit">0</span>;
+<span class="kw">for</span> (<span class="kw">int</span> c:coins)
+    <span class="kw">for</span> (<span class="kw">int</span> i=c; i&lt;=amount; i++)
+        dp[i]=<span class="type">Math</span>.<span class="fn">min</span>(dp[i], dp[i<span class="op">-</span>c]<span class="op">+</span><span class="num-lit">1</span>);
+<span class="kw">return</span> dp[amount]&gt;amount ? <span class="num-lit">-1</span> : dp[amount];</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #300</span><span class="q-title">Longest Increasing Subsequence</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span>[] dp=<span class="kw">new int</span>[nums.length]; <span class="type">Arrays</span>.<span class="fn">fill</span>(dp,<span class="num-lit">1</span>); <span class="kw">int</span> res=<span class="num-lit">1</span>;
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">1</span>; i&lt;nums.length; i++)
+    <span class="kw">for</span> (<span class="kw">int</span> j=<span class="num-lit">0</span>; j&lt;i; j++)
+        <span class="kw">if</span> (nums[i]&gt;nums[j]) dp[i]=<span class="type">Math</span>.<span class="fn">max</span>(dp[i],dp[j]<span class="op">+</span><span class="num-lit">1</span>);
+<span class="kw">for</span> (<span class="kw">int</span> x:dp) res=<span class="type">Math</span>.<span class="fn">max</span>(res,x);
+<span class="kw">return</span> res;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #1143</span><span class="q-title">Longest Common Subsequence</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> m=a.<span class="fn">length</span>(), n=b.<span class="fn">length</span>();
+<span class="kw">int</span>[][] dp=<span class="kw">new int</span>[m<span class="op">+</span><span class="num-lit">1</span>][n<span class="op">+</span><span class="num-lit">1</span>];
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">1</span>; i&lt;=m; i++)
+    <span class="kw">for</span> (<span class="kw">int</span> j=<span class="num-lit">1</span>; j&lt;=n; j++)
+        dp[i][j]=a.<span class="fn">charAt</span>(i<span class="op">-</span><span class="num-lit">1</span>)==b.<span class="fn">charAt</span>(j<span class="op">-</span><span class="num-lit">1</span>)
+            ? dp[i<span class="op">-</span><span class="num-lit">1</span>][j<span class="op">-</span><span class="num-lit">1</span>]<span class="op">+</span><span class="num-lit">1</span>
+            : <span class="type">Math</span>.<span class="fn">max</span>(dp[i<span class="op">-</span><span class="num-lit">1</span>][j], dp[i][j<span class="op">-</span><span class="num-lit">1</span>]);
+<span class="kw">return</span> dp[m][n];</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #62</span><span class="q-title">Unique Paths</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span>[][] dp=<span class="kw">new int</span>[m][n];
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;m; i++) dp[i][<span class="num-lit">0</span>]=<span class="num-lit">1</span>;
+<span class="kw">for</span> (<span class="kw">int</span> j=<span class="num-lit">0</span>; j&lt;n; j++) dp[<span class="num-lit">0</span>][j]=<span class="num-lit">1</span>;
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">1</span>; i&lt;m; i++)
+    <span class="kw">for</span> (<span class="kw">int</span> j=<span class="num-lit">1</span>; j&lt;n; j++)
+        dp[i][j]=dp[i<span class="op">-</span><span class="num-lit">1</span>][j]<span class="op">+</span>dp[i][j<span class="op">-</span><span class="num-lit">1</span>];
+<span class="kw">return</span> dp[m<span class="op">-</span><span class="num-lit">1</span>][n<span class="op">-</span><span class="num-lit">1</span>];</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #416</span><span class="q-title">Partition Equal Subset Sum</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> sum=<span class="num-lit">0</span>; <span class="kw">for</span> (<span class="kw">int</span> n:nums) sum<span class="op">+=</span>n;
+<span class="kw">if</span> (sum%<span class="num-lit">2</span>!=<span class="num-lit">0</span>) <span class="kw">return false</span>;
+<span class="kw">int</span> target=sum/<span class="num-lit">2</span>;
+<span class="kw">boolean</span>[] dp=<span class="kw">new boolean</span>[target<span class="op">+</span><span class="num-lit">1</span>]; dp[<span class="num-lit">0</span>]=<span class="kw">true</span>;
+<span class="kw">for</span> (<span class="kw">int</span> n:nums)
+    <span class="kw">for</span> (<span class="kw">int</span> j=target; j&gt;=n; j--)
+        dp[j]=dp[j]||dp[j<span class="op">-</span>n];
+<span class="kw">return</span> dp[target];</pre></div>
+    </div>
+  </section>
+
+  <!-- 9. GRAPHS -->
+  <section class="category theme-red" id="graphs">
+    <div class="section-header">
+      <div class="section-icon">🕸️</div>
+      <div class="section-title">Graphs</div>
+      <div class="section-count">6 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #200</span><span class="q-title">Number of Islands</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">DFS from each unvisited '1', marking all connected land as visited.</div><div class="code-label">Java Solution</div><pre><span class="kw">void</span> <span class="fn">dfs</span>(<span class="kw">char</span>[][] g, <span class="kw">int</span> i, <span class="kw">int</span> j) {
+    <span class="kw">if</span> (i&lt;<span class="num-lit">0</span>||j&lt;<span class="num-lit">0</span>||i&gt;=g.length||j&gt;=g[<span class="num-lit">0</span>].length||g[i][j]==<span class="str">'0'</span>) <span class="kw">return</span>;
+    g[i][j]=<span class="str">'0'</span>;
+    <span class="fn">dfs</span>(g,i<span class="op">+</span><span class="num-lit">1</span>,j); <span class="fn">dfs</span>(g,i<span class="op">-</span><span class="num-lit">1</span>,j); <span class="fn">dfs</span>(g,i,j<span class="op">+</span><span class="num-lit">1</span>); <span class="fn">dfs</span>(g,i,j<span class="op">-</span><span class="num-lit">1</span>);
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #207</span><span class="q-title">Course Schedule</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Topological sort — detect cycle using BFS with in-degree count.</div><div class="code-label">Java Solution</div><pre><span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; g=<span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;(); <span class="kw">int</span>[] indeg=<span class="kw">new int</span>[num];
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>;i&lt;num;i++) g.<span class="fn">add</span>(<span class="kw">new</span> <span class="fn">ArrayList</span>&lt;&gt;());
+<span class="kw">for</span> (<span class="kw">int</span>[] p:pre) { g.<span class="fn">get</span>(p[<span class="num-lit">1</span>]).<span class="fn">add</span>(p[<span class="num-lit">0</span>]); indeg[p[<span class="num-lit">0</span>]]<span class="op">++</span>; }
+<span class="type">Queue</span>&lt;<span class="type">Integer</span>&gt; q=<span class="kw">new</span> <span class="fn">LinkedList</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>;i&lt;num;i++) <span class="kw">if</span>(indeg[i]==<span class="num-lit">0</span>) q.<span class="fn">add</span>(i);
+<span class="kw">int</span> done=<span class="num-lit">0</span>;
+<span class="kw">while</span>(!q.<span class="fn">isEmpty</span>()) {
+    <span class="kw">int</span> cur=q.<span class="fn">poll</span>(); done<span class="op">++</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> nei:g.<span class="fn">get</span>(cur)) <span class="kw">if</span>(--indeg[nei]==<span class="num-lit">0</span>) q.<span class="fn">add</span>(nei);
+}
+<span class="kw">return</span> done==num;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #785</span><span class="q-title">Is Graph Bipartite?</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">boolean</span> <span class="fn">dfs</span>(<span class="kw">int</span>[][] g, <span class="kw">int</span> i, <span class="kw">int</span> c, <span class="kw">int</span>[] color) {
+    <span class="kw">if</span> (color[i]!=<span class="num-lit">0</span>) <span class="kw">return</span> color[i]==c;
+    color[i]=c;
+    <span class="kw">for</span> (<span class="kw">int</span> nei:g[i]) <span class="kw">if</span>(!<span class="fn">dfs</span>(g,nei,<span class="op">-</span>c,color)) <span class="kw">return false</span>;
+    <span class="kw">return true</span>;
+}</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #994</span><span class="q-title">Rotting Oranges</span><span class="q-diff diff-medium">Medium</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Multi-source BFS — start from all rotten oranges simultaneously, expand layer by layer.</div><div class="code-label">Java Solution</div><pre><span class="kw">int</span> m=g.length, n=g[<span class="num-lit">0</span>].length, fresh=<span class="num-lit">0</span>, time=<span class="num-lit">0</span>;
+<span class="type">Queue</span>&lt;<span class="kw">int</span>[]&gt; q=<span class="kw">new</span> <span class="fn">LinkedList</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>;i&lt;m;i++) <span class="kw">for</span> (<span class="kw">int</span> j=<span class="num-lit">0</span>;j&lt;n;j++) {
+    <span class="kw">if</span>(g[i][j]==<span class="num-lit">2</span>) q.<span class="fn">add</span>(<span class="kw">new int</span>[]{i,j});
+    <span class="kw">if</span>(g[i][j]==<span class="num-lit">1</span>) fresh<span class="op">++</span>;
+}
+<span class="kw">int</span>[][] dirs={{<span class="num-lit">1</span>,<span class="num-lit">0</span>},{<span class="op">-</span><span class="num-lit">1</span>,<span class="num-lit">0</span>},{<span class="num-lit">0</span>,<span class="num-lit">1</span>},{<span class="num-lit">0</span>,<span class="op">-</span><span class="num-lit">1</span>}};
+<span class="kw">while</span>(!q.<span class="fn">isEmpty</span>()&amp;&amp;fresh&gt;<span class="num-lit">0</span>) {
+    <span class="kw">for</span> (<span class="kw">int</span> s=q.<span class="fn">size</span>();s&gt;<span class="num-lit">0</span>;s--) {
+        <span class="kw">int</span>[] cur=q.<span class="fn">poll</span>();
+        <span class="kw">for</span> (<span class="kw">int</span>[] d:dirs) {
+            <span class="kw">int</span> x=cur[<span class="num-lit">0</span>]<span class="op">+</span>d[<span class="num-lit">0</span>], y=cur[<span class="num-lit">1</span>]<span class="op">+</span>d[<span class="num-lit">1</span>];
+            <span class="kw">if</span>(x&lt;<span class="num-lit">0</span>||y&lt;<span class="num-lit">0</span>||x&gt;=m||y&gt;=n||g[x][y]!=<span class="num-lit">1</span>) <span class="kw">continue</span>;
+            g[x][y]=<span class="num-lit">2</span>; fresh--; q.<span class="fn">add</span>(<span class="kw">new int</span>[]{x,y});
+        }
+    } time<span class="op">++</span>;
+}
+<span class="kw">return</span> fresh==<span class="num-lit">0</span>?time:<span class="num-lit">-1</span>;</pre></div>
+    </div>
+  </section>
+
+  <!-- 10. BIT MANIPULATION -->
+  <section class="category theme-indigo" id="bits">
+    <div class="section-header">
+      <div class="section-icon">🔢</div>
+      <div class="section-title">Bit Manipulation</div>
+      <div class="section-count">4 problems</div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #136</span><span class="q-title">Single Number</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">XOR cancels out numbers that appear twice — what remains is the unique number.</div><div class="code-label">Java Solution</div><pre><span class="kw">int</span> res=<span class="num-lit">0</span>;
+<span class="kw">for</span> (<span class="kw">int</span> n:nums) res<span class="op">^=</span>n;
+<span class="kw">return</span> res;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #190</span><span class="q-title">Reverse Bits</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="code-label">Java Solution</div><pre><span class="kw">int</span> res=<span class="num-lit">0</span>;
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;<span class="num-lit">32</span>; i++) {
+    res=(res&lt;&lt;<span class="num-lit">1</span>)|(n&amp;<span class="num-lit">1</span>);
+    n&gt;&gt;&gt;=<span class="num-lit">1</span>;
+}
+<span class="kw">return</span> res;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #191</span><span class="q-title">Number of 1 Bits</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">Hamming weight — count set bits by repeatedly masking the LSB and right-shifting.</div><div class="code-label">Java Solution</div><pre><span class="kw">int</span> count=<span class="num-lit">0</span>;
+<span class="kw">while</span> (n!=<span class="num-lit">0</span>) { count<span class="op">+=</span>n&amp;<span class="num-lit">1</span>; n&gt;&gt;&gt;=<span class="num-lit">1</span>; }
+<span class="kw">return</span> count;</pre></div>
+    </div>
+
+    <div class="q-card" onclick="toggle(this)">
+      <div class="q-header"><span class="q-num">LC #268</span><span class="q-title">Missing Number</span><span class="q-diff diff-easy">Easy</span><span class="q-toggle">▼</span></div>
+      <div class="q-body"><div class="q-problem">XOR index with value — paired elements cancel, leaving the missing number.</div><div class="code-label">Java Solution</div><pre><span class="kw">int</span> res=nums.length;
+<span class="kw">for</span> (<span class="kw">int</span> i=<span class="num-lit">0</span>; i&lt;nums.length; i++) res<span class="op">^=</span>i<span class="op">^</span>nums[i];
+<span class="kw">return</span> res;</pre></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-name">Kartikey Sharma</div>
+  <div class="footer-sub">// 75 DSA Questions · Java · LeetCode · 2024</div>
+</footer>
+
+<script>
+  function toggle(card) {
+    card.classList.toggle('open');
+  }
+
+  // Animate categories on scroll
+  const cats = document.querySelectorAll('.category');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.animationDelay = '0s';
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.05 });
+  cats.forEach(c => { c.style.opacity = '0'; observer.observe(c); });
+</script>
+</body>
+</html>

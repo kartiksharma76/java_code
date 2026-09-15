@@ -1,0 +1,4 @@
+database.driverclass=com.mysql.cj.jdbc.Driver
+database.url=jdbc:mysql://localhost:3306/test
+database.user=root
+database.password=Kartik@2005

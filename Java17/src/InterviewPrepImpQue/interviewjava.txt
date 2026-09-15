@@ -1,0 +1,1406 @@
+JAVA INTERVIEW QUESTIONS
+
+
+1. What are the main features of Java?
+The main feature of java is - Plateform Independent-> Write Once Run AnyWhere(WORA)
+Object-Oriented- Uses classes & objects
+Simple & Easy ->  no pointer , automatic memory management
+Secure -> ByteCode + no direct memory access
+Robust -> Exception handling  , strong memory management
+Multithreaded -> Can run multiple tasks simultaneously
+High Preformance -> JIT compile improves speed 
+"Java ek platform independent, secure aur object-oriented language hai."
+
+
+2. Difference between JDK,JRE and JVM
+JDK -> code likhna + compile karna ke tools
+JRE -> program run karne ka environment
+JVM -> code ko machine language me convert karta hai
+
+short -> JDK = JRE + TOOLS
+      -> JRE = JVM + LIBRARIES
+      
+
+3. what is JVM ?
+JVM ek virtual machine hai
+java code(bytecode ) ko run karta hai 
+Machine language me convert karta hai
+memory ko manage karta hai + garbage collection karta hai  
+
+Interview line:
+"JVM Java ka core hai jo code ko execute karta hai."
+  
+4.Explain OOP concepts in Java?
+Encaptulation -> data hide karna(private + getter/setter)
+Abstraction -> internal logic hide(abstract/interface)
+Inheritance -> ek class dusri ke property use kare
+Polymorphism 
+Overloading(compile time)
+Overriding (runtime)
+Short line:
+"OOP code ko reusable aur secure banata hai."
+
+
+5.Difference between == and .equals() ?
+== -> address compare karta hai
+.equals()-> value compare karta hai
+Example:
+String a = "Hi";
+String b = "Hi";
+a == b        // reference
+a.equals(b)   // value
+"== reference check karta hai, equals value check karta hai."
+
+
+6.What are access modifiers?
+public -> sab jagah access
+protected -> same package + child class
+default -> sirf same package
+private -> sirf same class
+"Access modifiers visibility control karte hain."
+
+
+7.Difference between Abstract class vs Interface?
+Abstract class -> kuch methods complete + kuch incomplete
+Interface -> mostly abstract methods (pure design)
+"Abstract class partial abstraction, interface full abstraction."
+
+
+8. what is constructor ?
+special method hai
+Object banata hai automatically call hota hai
+Return type nahi hota
+Types:
+      Default
+      Parameterized
+      Copy (manually banate hain)
+Example:
+class A {
+ A() {}          // default
+A(int x) {}     // parameterized
+}
+
+
+9.Difference between Overloading vs Overriding ?
+Overloading -> same method, different parameters
+Overriding -> child class parent ka method change karta hai
+Easy yaad:
+Overloading = compile time
+Overriding = runtime
+
+10. Difference between Static vs Non-Static?
+ Static
+class se related
+object banane ki zarurat nahi
+
+Non-static
+object se related
+object banana padega
+
+Example:
+
+class Test {
+    static void show() {}   // static
+    void display() {}       // non-static
+}
+Interview line:
+"Static methods class se belong karte hain, non-static object se."
+
+
+"Java ek platform independent aur object-oriented language hai jo JVM ke through run hoti hai. Isme encapsulation, 
+inheritance, polymorphism jaise OOP concepts hote hain, aur yeh secure, robust aur multithreading support karti hai."
+
+11.What is Final keyword ?
+final Variable -> value change nahi kho sakti
+final Method ->override nahi kar sakta 
+final class -> inherit nahikr sakte
+final int x = 10;   // change nahi hoga
+"final keyword restriction lagata hai — value, method ya class ko modify hone se rokta hai."
+
+
+12.what is Packages ?
+Package ek folder/collection hota hai jisme related classes hoti hain
+Code ko organize karta hai
+Naming conflict avoid karta hai
+package mypack;
+Interview line:
+"Package Java me classes ko organize karne ke liye use hota hai."
+
+
+13. explain this and super ?
+this
+Current object ko refer karta hai
+Same class ke variable/method access karta hai
+
+super
+Parent class ko refer karta hai
+Parent ke method/constructor call karta hai
+
+Example:
+this.name = name;   // current class
+super.show();       // parent class
+Easy line:
+"this current object ke liye, super parent class ke liye use hota hai."
+
+14. String vs StringBuilder vs StringBuffer ?
+| Feature     | String | StringBuilder | StringBuffer |
+| ----------- | ------ | ------------- | ------------ |
+| Mutable     | ❌ No  | ✅ Yes         | ✅ Yes      |
+| Thread safe | ❌ No  | ❌ No          | ✅ Yes      |
+| Speed       | Slow   | Fast          | Medium       |
+-------------------------------------------------------
+Simple samajh:
+
+String ->change nahi hota
+StringBuilder -> fast, non-thread safe
+StringBuffer -> thread-safe but slow
+Interview line:
+"String immutable hai, jabki StringBuilder aur StringBuffer mutable hote hain."
+
+
+15. Exceptions kya hote hain?
+Runtime pe aane wali errors
+Program crash hone se bachate hain
+ Example:
+divide by zero
+file not found
+
+Interview line:
+"Exception runtime error hota hai jise handle karke program ko safe banaya jata hai."
+
+
+16. Checked vs Unchecked exceptions ?
+Checked Exception
+Compile time pe check hota hai
+Handle karna compulsory hai
+  Example: IOException
+  
+Unchecked Exception
+Runtime pe aata hai
+Handle optional hai
+Example: NullPointerException
+Easy line:
+"Checked compile time pe, unchecked runtime pe aata hai."
+
+17. try-catch-finally kya hai?
+try -> risky code
+catch -> error handle
+finally -> always execute hota hai
+Example:
+try {
+   int x = 10/0;
+} catch(Exception e) {
+   System.out.println("Error");
+} finally {
+   System.out.println("Done");
+}
+
+
+
+18. throw vs throws ?
+throw
+manually exception throw karte hain
+ek hi exception
+
+throws
+method declare karta hai ki exception aa sakta hai
+multiple exceptions
+
+Example:
+throw new Exception();
+void test() throws Exception {}
+
+Easy line:
+"throw exception ko throw karta hai, throws exception declare karta hai."
+
+
+19.Multithreading kya hai?
+Ek program me multiple threads ek saath run hote hain
+Parallel kaam kar sakte hain
+
+Example:
+Download + music ek saath
+
+Interview line:
+"Multithreading ek process me multiple tasks ko simultaneously run karne ka concept hai."
+
+
+20.Synchronization kya hai?
+Multiple threads ek hi resource use karte hain
+Data conflict avoid karne ke liye use hota hai
+Example:
+synchronized void show() {
+   // safe code
+}
+
+Interview line:
+"Synchronization thread safety provide karta hai aur data inconsistency ko rokta hai."
+
+
+30. Lambda Expression
+Lambda ek short way hai function likhne ka bina extra code ke.
+Ye functional programming ko support karta hai.
+
+31. Functional Interface
+Aisi interface jisme sirf ek abstract method hota hai.
+Example: Runnable
+Lambda isi pe kaam karta hai.
+
+32. Stream API
+Data ko process karne ka modern tareeka hai.
+Filter, map, reduce jaise operations use hote hain.
+Code clean aur efficient ho jata hai.
+
+33. Optional class
+Null value handle karne ke liye use hota hai.
+NullPointerException avoid karta hai.
+
+34. Default & Static methods in interface
+Interface me method body allow karte hain.
+Default backward compatibility ke liye hota hai.
+Static method directly interface se call hota hai.
+
+35. Garbage Collection
+Java automatically unused objects ko memory se remove karta hai.
+Memory management easy ho jata hai.
+
+36. finalize() method
+Garbage collection se pehle call hota tha.
+Ab deprecated hai, use nahi karna chahiye.
+
+37. Annotations
+Code ke upar extra information dene ke liye use hote hain.
+Example: @Override
+
+38. Reflection
+Runtime pe class, method, field ko access kar sakte hain.
+Dynamic behavior ke liye use hota hai.
+
+39. Serialization & Deserialization
+Serialization: object ko byte stream me convert karna
+Deserialization: byte stream se object banana
+
+40. transient keyword
+Is variable ko serialization me include nahi kiya jata.
+
+41. Memory management in Java
+JVM heap aur stack memory use karta hai.
+Garbage collector memory clean karta hai.
+
+42. JDBC
+Java Database Connectivity
+Java se database connect karne ke liye API
+
+43. DB connect kaise karte hain
+Driver load → connection create → query execute
+
+44. Statement vs PreparedStatement
+Statement: simple query
+PreparedStatement: precompiled, fast aur secure (SQL injection safe)
+
+45. Singleton pattern
+Sirf ek object create hota hai class ka.
+Global access milta hai.
+
+46. Factory pattern
+Object creation ko centralize karta hai.
+User ko direct object create nahi karna padta.
+
+47. Dependency Injection
+Object dependency bahar se provide ki jati hai.
+Loose coupling milta hai.
+
+48. Stack vs Heap
+Stack: local variables
+Heap: objects
+Stack fast hota hai, heap dynamic hota hai.
+
+49. Inner classes
+Class ke andar class hoti hai.
+Better grouping aur encapsulation milta hai.
+
+50. Debugging Java application
+Error find aur fix karna
+Tools: breakpoints, step execution
+
+51. Shallow copy vs Deep copy
+Shallow: reference copy
+Deep: actual object copy
+
+52. Object cloning
+Object ki copy banana
+clone() method use hota hai
+
+53. String immutable kyu hai
+Security aur performance ke liye
+Value change nahi hoti
+
+54. String pool
+Memory area jaha string literals store hote hain
+Duplicate avoid hota hai
+
+55. String literal vs new String()
+Literal: pool me store
+new: heap me new object
+
+56. Wrapper classes
+Primitive ko object me convert karte hain
+Example: int → Integer
+
+57. Autoboxing & Unboxing
+Autoboxing: primitive → object
+Unboxing: object → primitive
+
+58. instanceof operator
+Check karta hai object kis class ka hai
+
+59. Marker interface
+Empty interface
+Signal dene ke liye use hota hai
+Example: Serializable
+
+60. Serializable interface
+Object ko serialize karne ke liye use hota hai
+
+61. Encapsulation
+Encapsulation ka matlab hai data ko hide karna aur controlled access dena.
+Isme variables private rakhe jate hain aur access getter/setter se hota hai.
+Isse data secure rehta hai aur direct modification avoid hota hai.
+Code maintainable aur safe ho jata hai.
+
+62. Abstraction
+Abstraction me hum internal implementation hide karte hain aur sirf functionality dikhate hain.
+User ko bas “kya karna hai” pata hota hai, “kaise ho raha hai” nahi.
+Abstract class aur interface se achieve hota hai.
+Code complexity reduce hoti hai.
+
+63. Inheritance types
+Inheritance me ek class dusri class ki properties use karti hai.
+Types: Single, Multilevel, Hierarchical.
+Java me multiple inheritance class se allowed nahi hai (diamond problem).
+Interface ke through multiple inheritance possible hai.
+
+64. Polymorphism
+Polymorphism ka matlab hai same method ka different behavior.
+Overloading compile time pe hota hai (same method, different parameters).
+Overriding runtime pe hota hai (parent method ko change karna).
+Flexibility aur reusability increase hoti hai.
+
+65. Composition vs Inheritance
+Inheritance “is-a” relation hota hai (Dog is Animal).
+Composition “has-a” relation hota hai (Car has Engine).
+Composition zyada flexible aur loosely coupled hota hai.
+Modern design me composition prefer kiya jata hai.
+
+66. Aggregation
+Aggregation ek weak relationship hai object ke beech.
+Child object independently exist kar sakta hai.
+Example: Student aur College (student college ke bina bhi exist kar sakta hai).
+Ye “has-a” relation ka hi type hai.
+
+67. SOLID principles
+SOLID 5 design principles hain jo clean aur maintainable code ke liye use hote hain.
+Single Responsibility, Open-Closed, Liskov, Interface Segregation, Dependency Inversion.
+Ye code ko flexible aur scalable banate hain.
+Large projects me bahut important hote hain.
+
+68. Loose coupling
+Loose coupling ka matlab hai classes ek dusre pe kam depend karein.
+Agar ek class change ho to dusri pe effect na pade.
+Dependency Injection se achieve hota hai.
+Maintainability improve hoti hai.
+
+69. Cohesion
+Cohesion ka matlab hai ek class ka kaam kitna focused hai.
+High cohesion matlab class ek specific kaam kare.
+Low cohesion matlab multiple unrelated kaam kare.
+High cohesion better design mana jata hai.
+
+70. POJO class
+POJO ek simple Java class hoti hai bina kisi framework dependency ke.
+Isme variables, constructors, getter/setter hote hain.
+Business logic minimal hota hai.
+Data transfer ke liye use hota hai.
+
+71. JVM memory areas
+JVM memory ko different parts me divide karta hai.
+Heap me objects store hote hain, stack me method calls.
+Method area me class metadata hota hai.
+Har part ka alag role hota hai.
+
+72. Heap vs Stack
+Heap memory me objects dynamically store hote hain.
+Stack memory me local variables aur method calls hote hain.
+Stack fast hota hai, heap flexible hota hai.
+Garbage collection heap pe kaam karta hai.
+
+73. Method Area / Metaspace
+Yaha class metadata store hota hai.
+Java 8 ke baad PermGen ki jagah Metaspace aaya.
+Ye JVM ke outside memory me hota hai.
+Class loading ke time use hota hai.
+
+74. ClassLoader
+ClassLoader ka kaam class ko JVM me load karna hai.
+Jab bhi class use hoti hai, pehle load hoti hai.
+Bytecode ko memory me lata hai.
+Dynamic loading support karta hai.
+
+75. Types of ClassLoader
+Bootstrap (core classes load karta hai).
+Extension (library classes load karta hai).
+Application (user-defined classes load karta hai).
+Ye hierarchy me kaam karte hain.
+
+76. Bytecode
+Java code compile hone ke baad bytecode banta hai.
+Ye platform-independent hota hai.
+JVM ise execute karta hai.
+Isi wajah se Java portable hai.
+
+77. JIT compiler
+JIT runtime pe bytecode ko machine code me convert karta hai.
+Frequently used code ko optimize karta hai.
+Performance improve hoti hai.
+Execution fast ho jata hai.
+
+78. GC root
+GC root starting point hota hai jahan se objects reachable hote hain.
+Jo objects reachable nahi hote wo garbage ban jate hain.
+GC unhe remove kar deta hai.
+Memory clean hoti hai.
+
+79. Memory leak
+Jab object use nahi ho raha par memory free nahi ho rahi.
+Unnecessary references ki wajah se hota hai.
+Performance degrade karta hai.
+GC properly clean nahi kar pata.
+
+80. OOM vs StackOverflowError
+OOM tab aata hai jab heap memory full ho jaye.
+StackOverflow recursion ya deep call stack se hota hai.
+OOM memory issue hai, StackOverflow call issue hai.
+Dono runtime errors hain.
+
+81. GC algorithms
+Garbage collection ke different techniques hote hain.
+Example: Mark-Sweep, Generational, G1.
+Har algorithm ka performance impact alag hota hai.
+Modern JVM optimized GC use karta hai.
+
+82. Mark & Sweep
+Mark phase me used objects identify hote hain.
+Sweep phase me unused objects delete hote hain.
+Simple aur basic GC technique hai.
+Fragmentation issue ho sakta hai.
+
+83. G1 GC
+G1 ek modern garbage collector hai.
+Large heap ko efficiently manage karta hai.
+Regions me memory divide karta hai.
+Low pause time ke liye use hota hai.
+
+84. Minor vs Major GC
+Minor GC young generation me hota hai.
+Major GC old generation me hota hai.
+Minor fast hota hai, major slow hota hai.
+Dono memory cleanup ke liye important hain.
+
+85. Stop-the-world
+GC ke time sab threads temporarily pause ho jate hain.
+Application ruk jata hai short time ke liye.
+Performance impact hota hai.
+Modern GC isko minimize karte hain.
+
+86. Reference types
+Strong, Weak, Soft, Phantom references hote hain.
+Memory control ke liye use hote hain.
+Weak reference jaldi remove ho jata hai.
+Caching me useful hote hain.
+
+87. finalize() issues
+finalize unpredictable hota tha.
+Kab call hoga clear nahi hota.
+Performance slow karta tha.
+Isliye avoid kiya jata hai.
+
+88. finalize deprecated kyu
+Reliable nahi tha aur GC control me problem deta tha.
+Memory leak ka risk bhi badhata tha.
+Alternative better methods aa gaye.
+Isliye Java ne remove kar diya.
+
+89. GC tuning basics
+Heap size aur GC type adjust karte hain.
+Performance improve karne ke liye tuning hoti hai.
+Large apps me important hota hai.
+Wrong tuning se slowdown ho sakta hai.
+
+90. Memory monitoring tools
+JConsole aur VisualVM use hote hain.
+Memory usage, threads monitor karte hain.
+Leak detect karne me help milti hai.
+Performance analysis ke liye useful hain.
+
+91. Thread vs Process
+Process ek independent program hota hai.
+Thread process ka chhota part hota hai.
+Threads lightweight hote hain.
+Communication fast hota hai.
+
+92. Thread lifecycle
+Thread ke stages: New, Runnable, Running, Waiting, Terminated.
+Har stage ka apna role hota hai.
+State change execution pe depend karta hai.
+Multithreading samajhne ke liye important hai.
+
+93. start() vs run()
+start() new thread create karta hai.
+run() normal method call jaisa behave karta hai.
+start() se concurrency aati hai.
+run() se nahi aati.
+
+94. Synchronization
+Multiple threads ko safe tarike se shared data use karne deta hai.
+Data inconsistency avoid hoti hai.
+synchronized keyword use hota hai.
+Thread safety milti hai.
+
+95. Intrinsic lock
+Har object ke paas ek internal lock hota hai.
+synchronized isi lock ko use karta hai.
+Ek time pe ek thread hi access karta hai.
+Concurrency control milta hai.
+
+96. Deadlock
+Do ya zyada threads ek dusre ka wait karte rehte hain.
+Koi bhi aage nahi badhta.
+Program freeze ho jata hai.
+Avoid karna important hai.
+
+97. Race condition
+Multiple threads ek hi data ko ek saath change karte hain.
+Final result unpredictable hota hai.
+Synchronization se avoid hota hai.
+Concurrency bug hai.
+
+98. volatile keyword
+Variable ka latest value sab threads ko dikhta hai.
+Caching issue solve karta hai.
+Thread visibility improve karta hai.
+Synchronization ka lightweight option hai.
+
+99. synchronized vs Lock
+synchronized simple hai aur automatic lock release karta hai.
+Lock (ReentrantLock) manual control deta hai.
+Lock me tryLock, fairness jaise features hote hain.
+Advanced use cases me Lock better hai.
+
+100. ReentrantLock
+Ye ek advanced locking mechanism hai.
+Same thread multiple baar lock le sakta hai.
+Zyada control deta hai synchronized se.
+Concurrency handling me useful hai.
+
+101. Executor framework
+Executor framework multithreading ko manage karne ka high-level API hai.
+Thread creation aur lifecycle manually handle nahi karna padta.
+Task ko submit karte hain instead of creating threads directly.
+Thread pool ke through threads reuse hote hain.
+Performance better hoti hai.
+Code clean aur scalable hota hai.
+
+102. Thread pool
+Thread pool ek group hota hai reusable threads ka.
+Har baar new thread banane ki zarurat nahi hoti.
+Tasks queue me jate hain aur threads unhe execute karte hain.
+System resources save hote hain.
+Performance improve hoti hai.
+Large applications me widely use hota hai.
+
+103. Types of thread pools
+Fixed thread pool: fixed number of threads
+Cached thread pool: dynamically create/remove threads
+Single thread pool: ek hi thread use hota hai
+Scheduled thread pool: delay ya periodic tasks ke liye
+Different use cases ke hisab se use hota hai
+ExecutorService se create karte hain
+
+104. Callable vs Runnable
+Runnable me run() hota hai aur return value nahi hoti
+Callable me call() hota hai aur value return karta hai
+Callable exception throw kar sakta hai
+Runnable simple tasks ke liye
+Callable advanced tasks ke liye
+Future ke saath use hota hai
+
+105. Future interface
+Future ek result holder hota hai async task ka
+Callable ke saath use hota hai
+get() method se result milta hai
+Task complete hua ya nahi check kar sakte hain
+Blocking behavior hota hai
+Async programming me important hai
+
+106. CompletableFuture
+Future ka advanced version hai
+Async programming easy banata hai
+Non-blocking operations support karta hai
+Chaining aur combining tasks possible hai
+Performance better hoti hai
+Modern Java me widely use hota hai
+
+107. BlockingQueue
+Thread-safe queue hoti hai
+Producer-consumer problem me use hoti hai
+Automatically wait karti hai jab queue empty/full ho
+Synchronization ki need kam ho jati hai
+Example: ArrayBlockingQueue
+Concurrency me important role hai
+
+108. Concurrent collections
+Thread-safe collections hote hain
+Example: ConcurrentHashMap
+Multiple threads safely access kar sakte hain
+Performance synchronized collections se better hoti hai
+Locking optimized hota hai
+Concurrency heavy apps me use hota hai
+
+109. CountDownLatch
+Threads ko wait karne ke liye use hota hai
+Ek count set hota hai
+Jab count zero hota hai tab threads continue karte hain
+One-time use hota hai
+Synchronization tool hai
+Parallel execution control karta hai
+
+110. CyclicBarrier
+Multiple threads ko ek point pe wait karata hai
+Sab threads ready hone par ek saath start karte hain
+Reusable hota hai (cyclic)
+Parallel tasks coordination me useful hai
+Game ya simulation me use hota hai
+Thread synchronization ke liye powerful tool hai
+
+111. HashMap internal working
+HashMap key-value pair store karta hai
+Key ka hashcode calculate hota hai
+Index find karke bucket me store hota hai
+Collision hone par linked list ya tree use hota hai
+Java 8 me treeification hota hai
+Fast access O(1) average time
+
+112. Hashing
+Data ko fixed size me convert karna hashing hai
+Hash function use hota hai
+Data retrieval fast hota hai
+HashMap me use hota hai
+Collision ho sakta hai
+Efficient searching ke liye important hai
+
+113. Hash collision
+Jab do keys ka same hashcode ho jaye
+Same bucket me store hoti hain
+Linked list ya tree se handle hota hai
+Performance degrade ho sakta hai
+Good hash function important hota hai
+Collision unavoidable hai
+
+114. Load factor
+HashMap me capacity vs elements ratio hota hai
+Default 0.75 hota hai
+Threshold cross hone par resize hota hai
+Performance balance karta hai
+High load factor = less space, more collision
+Low load factor = more space, less collision
+
+115. Rehashing
+Jab HashMap resize hota hai tab rehashing hoti hai
+Elements ko naye buckets me distribute kiya jata hai
+Performance temporarily slow hoti hai
+Load factor exceed hone par trigger hota hai
+Data redistribution hota hai
+Efficient storage ke liye important hai
+
+116. LinkedHashMap
+HashMap ka ordered version hai
+Insertion order maintain karta hai
+Doubly linked list use karta hai
+Iteration predictable hota hai
+LRU cache me use hota hai
+Performance HashMap jaisa hi hota hai
+
+117. TreeMap
+Sorted map hota hai
+Red-Black tree use karta hai
+Keys sorted order me store hoti hain
+Operations O(log n) hote hain
+Null key allow nahi karta
+Sorted data ke liye useful hai
+
+118. HashSet vs TreeSet
+HashSet unordered hota hai
+TreeSet sorted hota hai
+HashSet fast (O(1))
+TreeSet slow (O(log n))
+HashSet hash table use karta hai
+TreeSet tree structure use karta hai
+
+119. Fail-fast iterator
+Collection modify hone par exception throw karta hai
+ConcurrentModificationException deta hai
+Safety ke liye use hota hai
+Fast failure detect karta hai
+Iterator use karte waqt careful rehna padta hai
+Default collections me hota hai
+
+120. Fail-safe iterator
+Collection copy pe iterate karta hai
+Modification allowed hota hai
+Exception nahi aata
+Concurrent collections me use hota hai
+Safe but memory extra use hoti hai
+Example: ConcurrentHashMap
+
+121. Lambda internal working
+Lambda ko JVM internally anonymous class me convert karta hai
+Functional interface ke method ko implement karta hai
+Bytecode me optimized representation hota hai
+Less memory use hoti hai
+Performance better hoti hai
+Functional style programming support karta hai
+
+122. Functional interface examples
+Runnable, Callable, Comparator
+Predicate, Function, Consumer (Java 8)
+Single abstract method hota hai
+Lambda ke saath use hota hai
+Reusable logic banane me help karta hai
+Functional programming ka base hai
+
+123. Method reference
+Lambda ka short form hai
+Existing method ko directly refer karta hai
+Syntax: Class::method
+Readable code banata hai
+Lambda se bhi concise hota hai
+Example: System.out::println
+
+124. Stream API pipeline
+Stream pipeline me source → intermediate → terminal operations hote hain
+Intermediate operations lazy hote hain
+Terminal operation execution trigger karta hai
+Data processing chain me hota hai
+Readable aur efficient hota hai
+Functional programming support karta hai
+
+125. map() vs flatMap()
+map() ek element ko ek element me convert karta hai
+flatMap() nested structure ko flatten karta hai
+map() simple transformation ke liye
+flatMap() complex data ke liye
+Streams me commonly use hote hain
+Data transformation easy banate hain
+
+126. filter()
+Condition ke basis pe data select karta hai
+Predicate use hota hai
+Stream me intermediate operation hai
+Lazy evaluation hoti hai
+Readable code deta hai
+Data cleaning ke liye useful hai
+
+127. reduce()
+Data ko single value me convert karta hai
+Aggregation operation hai
+Example: sum, max
+Functional style me kaam karta hai
+Immutable operations use karta hai
+Parallel processing me useful hai
+
+128. Optional use cases
+Null check avoid karne ke liye use hota hai
+Safer code likhne me help karta hai
+orElse, ifPresent methods use hote hain
+NullPointerException avoid hota hai
+Readable code deta hai
+Functional programming me useful hai
+
+129. Parallel streams
+Multiple threads me stream process karta hai
+Large data me fast hota hai
+ForkJoinPool use karta hai
+Careful use karna chahiye (thread overhead)
+CPU intensive tasks me useful hai
+Performance depend karta hai use case pe
+
+130. Collectors
+Stream results ko collect karne ke liye use hota hai
+List, Set, Map me convert karta hai
+Grouping aur partitioning support karta hai
+Terminal operation hota hai
+Flexible data collection deta hai
+Example: Collectors.toList()
+
+131. Exception hierarchy
+Throwable top class hai
+Error aur Exception uske child hain
+Exception me checked aur unchecked aate hain
+Hierarchy structured hoti hai
+Handling easy hoti hai
+Custom exception create kar sakte hain
+
+132. Checked exception
+
+Compile time pe check hota hai
+Handle karna mandatory hai
+Example: IOException
+Compiler error deta hai agar handle na kare
+Reliable code banata hai
+External resource errors me use hota hai
+
+133. Unchecked exception
+Runtime pe aata hai
+Handle karna optional hai
+Example: NullPointerException
+Programming mistake hoti hai
+Fast execution hota hai
+Debugging me help karta hai
+
+134. Custom exception
+
+User-defined exception hoti hai
+Exception class extend karte hain
+Specific error handle kar sakte hain
+Readable aur meaningful error messages milte hain
+Large apps me useful hai
+Business logic ke liye use hota hai
+
+135. Try-with-resources
+Auto resource management karta hai
+Close() automatically call hota hai
+File, DB connection ke liye useful
+Memory leak avoid hota hai
+Cleaner code deta hai
+Java 7 me introduce hua
+
+136. Finally block
+Always execute hota hai
+Exception aaye ya na aaye
+Cleanup code ke liye use hota hai
+Resource release karta hai
+Reliable execution deta hai
+Rare case me skip ho sakta hai (System.exit)
+
+137. Can finally skip?
+Generally finally execute hota hai
+But kuch cases me skip ho sakta hai
+Example: System.exit()
+JVM crash ya power failure
+Normal flow me skip nahi hota
+Interview me important tricky question hai
+
+138. Multiple catch block
+Ek try ke multiple catch ho sakte hain
+Different exceptions handle karte hain
+Specific exception pehle likhna chahiye
+Order important hota hai
+Readable handling milti hai
+Flexible error handling deta hai
+
+139. Exception propagation
+Exception ek method se dusre method me pass hota hai
+Call stack ke through travel karta hai
+Agar handle na ho to program crash hota hai
+throws keyword se declare karte hain
+Centralized handling possible hai
+Code clean hota hai
+
+140. Exception handling best practices
+Specific exception catch karo
+Generic avoid karo
+Proper logging karo
+Resources close karo
+Meaningful message do
+Clean aur maintainable code likho
+
+141. JDBC architecture
+Java app → JDBC API → Driver → Database
+Driver database specific hota hai
+Connection establish karta hai
+Query execute hoti hai
+Result return hota hai
+Layered architecture hai
+
+142. DriverManager
+DB connection manage karta hai
+Driver load karta hai
+Connection object provide karta hai
+Multiple drivers support karta hai
+Simple connection ke liye use hota hai
+Legacy approach hai
+
+143. Connection interface
+DB connection represent karta hai
+Statement create karta hai
+Transaction manage karta hai
+Close() se connection close hota hai
+Core JDBC component hai
+Database interaction ka base hai
+
+144. Statement vs Prepared vs Callable
+Statement simple queries ke liye
+PreparedStatement precompiled aur secure
+CallableStatement stored procedure ke liye
+PreparedStatement fastest aur safe
+SQL injection avoid karta hai
+Different use cases ke liye use hote hain
+
+145. ResultSet
+Query ka result store karta hai
+Table jaisa structure hota hai
+Row by row access hota hai
+get methods se data lete hain
+Cursor based hota hai
+DB reading ke liye important hai
+
+146. Transaction management
+Multiple operations ko ek unit me treat karta hai
+ACID properties follow karta hai
+Commit aur rollback use hota hai
+Data consistency maintain karta hai
+Banking apps me important hai
+Failure me rollback hota hai
+
+147. Batch processing
+Multiple queries ek saath execute hoti hain
+Performance improve hoti hai
+DB round trips kam hote hain
+addBatch() aur executeBatch() use hota hai
+Large data insert/update me useful
+Efficient processing deta hai
+
+148. Connection pooling
+Pre-created connections ka pool hota hai
+Reuse hota hai instead of creating new
+Performance improve hoti hai
+Resource efficient hota hai
+Example: HikariCP
+Enterprise apps me use hota hai
+
+149. DAO pattern
+Data access logic separate karta hai
+Business logic se alag hota hai
+Maintainability improve hoti hai
+Reusable code milta hai
+Testing easy hoti hai
+Layered architecture me use hota hai
+
+150. MVC architecture
+Model: data
+View: UI
+Controller: logic
+Separation of concerns hota hai
+Maintainable aur scalable design
+Web apps me widely use hota hai
+
+
+151. Can we override static methods?
+Static methods override nahi hote, wo hide hote hain.
+Method overriding runtime concept hai, static compile time pe resolve hota hai.
+Isliye ise method hiding bolte hain.
+Parent reference se parent method call hoga.
+Child reference se child method call hoga.
+Polymorphism apply nahi hota static pe.
+
+152. Can we override private methods?
+Private methods override nahi hote.
+Wo subclass me visible hi nahi hote.
+Agar same name ka method banate ho to wo new method hota hai.
+Inheritance me participate nahi karta.
+Compile-time binding hoti hai.
+Encapsulation maintain karta hai.
+
+153. Can constructors be inherited?
+Constructors inherit nahi hote.
+But parent constructor child me call hota hai (super).
+Object create hote time chain execute hoti hai.
+Child ko parent initialization milta hai.
+Explicit super() call kar sakte hain.
+Default constructor auto call hota hai.
+
+154. Immutable class kaise banaye?
+Class final banaye.
+Fields private aur final rakhe.
+Setter methods na ho.
+Constructor se value initialize kare.
+Mutable objects ka deep copy return kare.
+Example: String immutable hai.
+
+155. main method static kyu hota hai?
+JVM ko object banane ki zarurat na pade.
+Direct class se call ho jaye.
+Program start point hota hai.
+Performance fast hoti hai.
+Static hone se global access milta hai.
+JVM easily execute kar pata hai.
+
+156. Multiple main methods allowed?
+Haan, allowed hain (overloading possible).
+But JVM sirf standard signature wale ko call karta hai.
+public static void main(String[] args)
+Baaki main methods manually call kar sakte hain.
+Entry point ek hi hota hai.
+Interview me trick question hai.
+
+157. What if no main method?
+Program run nahi hoga normally.
+JVM entry point nahi milega.
+Static block se run ho sakta tha (old versions me).
+Ab error aata hai.
+Main method required hai.
+Starting point compulsory hai.
+
+158. this() vs super()
+this() same class constructor call karta hai.
+super() parent constructor call karta hai.
+Dono first line me hone chahiye.
+Ek hi use kar sakte hain ek constructor me.
+Constructor chaining ke liye use hota hai.
+Initialization control karta hai.
+
+159. Can we use this in static?
+Nahi, use nahi kar sakte.
+this object ko refer karta hai.
+Static context me object nahi hota.
+Isliye compile error aata hai.
+Static me sirf static members access hote hain.
+Object required hota hai this ke liye.
+
+160. Object slicing
+Java me directly support nahi hai.
+C++ concept hai mostly.
+Parent reference child object ko point kare to partial access milta hai.
+Only parent members accessible hote hain.
+Child specific data hide ho jata hai.
+Polymorphism se related concept hai.
+
+161. String final kyu hai?
+Security ke liye final banaya gaya hai.
+Koi subclass bana ke behavior change na kare.
+Immutable maintain rahe.
+Hashcode stable rahe.
+Thread-safe ban jata hai.
+Performance optimize hoti hai.
+
+162. Custom immutable class
+Class final banaye.
+Fields private + final rakhe.
+No setter methods.
+Constructor se initialize kare.
+Mutable fields ka copy return kare.
+Consistency aur safety milti hai.
+
+163. final vs finally vs finalize
+final: keyword (constant, restriction)
+finally: block (always execute)
+finalize: method (GC ke time call)
+Teen alag concepts hain.
+Confuse nahi hona chahiye.
+Interview me frequently pucha jata hai.
+
+164. Exception in finally block
+Agar finally me exception aaye to previous exception override ho jata hai.
+Risky situation hoti hai.
+Avoid karna chahiye.
+Debugging tough ho jata hai.
+Best practice: finally me safe code likho.
+Logging important hai.
+
+165. Multi-catch block
+Ek catch me multiple exceptions handle kar sakte hain.
+Java 7 me introduce hua.
+Code concise hota hai.
+Syntax: catch(A | B e)
+Duplicate code avoid hota hai.
+Readable code milta hai.
+
+166. Catch block order
+Specific exception pehle likhna chahiye.
+General baad me.
+Galat order compile error deta hai.
+Top-down matching hoti hai.
+Proper hierarchy follow karni hoti hai.
+Interview me common trap hai.
+
+167. Return in try vs finally
+Agar try me return ho aur finally me bhi ho
+To finally ka return override karega.
+finally always execute hota hai.
+Unexpected result aa sakta hai.
+Avoid karna best practice hai.
+Code clarity important hai.
+
+168. Can we throw null?
+Haan, throw null allowed hai.
+But runtime pe NullPointerException aata hai.
+Actual exception object nahi hota.
+Confusing behavior hai.
+Avoid karna chahiye.
+Interview trick hai.
+
+169. Stack trace kya hai?
+Error ka detailed path hota hai.
+Kaunse method me error aaya wo batata hai.
+Debugging me help karta hai.
+Call stack show karta hai.
+Line number bhi deta hai.
+Exception handling me useful hai.
+
+170. Exception chaining
+Ek exception ke andar dusra exception attach karte hain.
+Root cause track karne me help karta hai.
+initCause() ya constructor se karte hain.
+Debugging easy hoti hai.
+Nested errors samajhne me useful hai.
+Large apps me important hai.
+
+171. HashMap Java 7 vs Java 8
+Java 7 me collision pe linked list use hota tha.
+Java 8 me threshold ke baad tree (Red-Black) ban jata hai.
+Performance improve hoti hai.
+Worst case O(n) se O(log n) ho jata hai.
+Treeification Java 8 me introduce hua.
+Efficient data handling hota hai.
+
+172. Treeification in HashMap
+Jab bucket size threshold cross kare
+Linked list tree me convert ho jati hai
+Red-Black tree use hota hai
+Performance improve hoti hai
+Search fast ho jata hai
+Java 8 feature hai
+
+173. HashMap thread-safe kyu nahi
+Multiple threads ek saath modify kar sakte hain
+Data inconsistent ho sakta hai
+Race condition hota hai
+Synchronization nahi hota
+Infinite loop ka risk (old versions me)
+Concurrent use ke liye unsafe hai
+
+174. ConcurrentHashMap
+Thread-safe HashMap hai
+Segmented locking use karta hai
+High concurrency support karta hai
+Performance synchronized map se better hai
+Read operations mostly lock-free hote hain
+Multithreaded apps me use hota hai
+
+175. ConcurrentHashMap vs HashMap
+HashMap non-thread-safe
+ConcurrentHashMap thread-safe
+HashMap fast single thread me
+ConcurrentHashMap safe multi-thread me
+Locking optimized hota hai
+Use case pe depend karta hai
+
+176. Internal working of ConcurrentHashMap
+Java 8 me segment remove ho gaya
+Bucket level locking use hoti hai
+CAS (Compare and Swap) use hota hai
+Reads mostly lock-free hote hain
+Writes me minimal locking hoti hai
+High performance concurrency milti hai
+
+177. CopyOnWriteArrayList
+Thread-safe list hai
+Har modification pe copy banata hai
+Read operations fast hote hain
+Write slow hota hai
+Concurrency me safe hai
+Mostly read-heavy use cases me use hota hai
+
+178. Iterator vs ListIterator
+Iterator forward traversal karta hai
+ListIterator forward + backward dono karta hai
+ListIterator me add/set/remove possible
+Iterator basic operations deta hai
+List specific hai
+Flexibility zyada hoti hai
+
+179. Enumeration
+Old iteration interface hai
+Vector aur Hashtable me use hota tha
+Read-only access deta hai
+Modern code me use nahi hota
+Iterator ne replace kar diya
+Legacy concept hai
+
+180. Vector legacy kyu hai
+Vector synchronized hota hai by default
+Performance slow ho jati hai
+Modern collections faster hain
+ArrayList preferred hai
+Legacy class mana jata hai
+Backward compatibility ke liye exist karta hai
+
+181. ThreadLocal
+Thread-specific variable store karta hai
+Har thread ka apna copy hota hai
+Shared data nahi hota
+Thread safety milti hai
+Useful in web apps (user session)
+Memory leak ka risk hota hai
+
+182. ForkJoinPool
+Parallel processing ke liye use hota hai
+Tasks ko divide aur combine karta hai
+Work-stealing algorithm use karta hai
+Recursive tasks ke liye best hai
+Parallel streams me use hota hai
+High performance deta hai
+
+183. Work stealing algorithm
+Idle thread dusre thread ka work le leta hai
+Load balance hota hai
+CPU utilization improve hoti hai
+ForkJoinPool me use hota hai
+Parallel execution fast hota hai
+Efficient resource usage deta hai
+
+184. Livelock
+Threads active rehte hain but progress nahi hoti
+Ek dusre ko continuously react karte hain
+Deadlock jaisa lagta hai but different hai
+CPU waste hoti hai
+Rare situation hai
+Careful design se avoid hota hai
+
+185. Starvation
+Thread ko CPU time nahi milta
+High priority threads resources le lete hain
+Low priority thread wait karta rehta hai
+Fair scheduling se avoid hota hai
+Performance issue hota hai
+Concurrency problem hai
+
+186. Daemon thread
+Background thread hota hai
+Main thread khatam hone par ye bhi terminate ho jata hai
+Example: Garbage Collector
+Service tasks ke liye use hota hai
+User thread pe depend karta hai
+JVM control karta hai
+
+187. Thread priority
+Thread execution preference set karta hai
+High priority thread pehle execute hota hai
+Range 1–10 hoti hai
+Scheduler pe depend karta hai
+Guaranteed nahi hota
+Hint jaisa behave karta hai
+
+188. wait(), notify(), notifyAll()
+Thread communication ke liye use hote hain
+wait() thread ko pause karta hai
+notify() ek thread ko jagata hai
+notifyAll() sabko jagata hai
+Object monitor pe kaam karte hain
+Synchronization required hoti hai
+
+189. sleep() vs wait()
+sleep() thread ko pause karta hai without releasing lock
+wait() lock release karta hai
+sleep() Thread class me hota hai
+wait() Object class me hota hai
+wait communication ke liye use hota hai
+Behavior different hota hai
+
+190. synchronized block vs method
+Method level me pura method lock hota hai
+Block me specific code lock hota hai
+Block zyada efficient hota hai
+Granularity control milta hai
+Performance better hoti hai
+Fine tuning possible hai
+
+191. Escape analysis
+JVM check karta hai object thread-safe hai ya nahi
+Agar object local hai to heap se stack pe shift kar sakta hai
+Synchronization remove ho sakta hai
+Performance improve hoti hai
+JIT optimization ka part hai
+Memory optimization me useful hai
+
+192. JVM tuning basics
+Heap size adjust karna (-Xmx, -Xms)
+GC type choose karna
+Performance optimize karna
+Monitoring tools use karna
+Application load ke hisab se tuning hoti hai
+Production me important hai
+
+193. JVM options (-Xmx, -Xms)
+-Xms initial heap size
+-Xmx maximum heap size
+Memory control ke liye use hote hain
+OOM avoid karne me help milti hai
+Performance tuning me important hai
+Startup behavior affect hota hai
+
+194. Profiling in Java
+Application performance analyze karna
+CPU, memory usage check karte hain
+Bottleneck identify karte hain
+Tools: VisualVM, JProfiler
+Optimization ke liye use hota hai
+Production debugging me helpful hai
+
+195. Heap dump
+Heap memory ka snapshot hota hai
+Memory leak detect karne me use hota hai
+Objects ka detail milta hai
+Tools se analyze karte hain
+Debugging me useful hai
+Large apps me important hai
+
+196. Thread dump
+Threads ka snapshot hota hai
+Kaunsa thread kya kar raha hai dikhta hai
+Deadlock detect kar sakte hain
+Debugging concurrency issues me use hota hai
+JVM tools se generate hota hai
+Performance analysis me helpful hai
+
+197. JConsole / VisualVM
+Monitoring tools hain
+Memory, CPU, threads track karte hain
+Real-time data show karte hain
+Profiling support karte hain
+Debugging easy banate hain
+Free tools hain JVM ke
+
+198. CPU vs Memory bottleneck
+CPU bottleneck: processing slow
+Memory bottleneck: memory insufficient
+Performance issue ka root alag hota hai
+Monitoring se identify karte hain
+Optimization strategy different hoti hai
+System tuning me important hai
+
+199. JIT optimizations
+Hot code ko optimize karta hai
+Inline methods use karta hai
+Dead code remove karta hai
+Loop optimization karta hai
+Execution fast ho jata hai
+Runtime performance improve hoti hai
+
+200. Class unloading
+Unused classes ko memory se remove karna
+Metaspace free hota hai
+Dynamic applications me useful hai
+GC ke through hota hai
+Memory leak avoid karta hai
+JVM optimization ka part hai

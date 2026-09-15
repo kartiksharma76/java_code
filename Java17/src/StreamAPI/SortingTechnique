@@ -1,0 +1,69 @@
+there are mainly below technique to sort the elements/objects in java
+1.by using comparable (will discuss later)
+if you want to sort any elements (all wrapper classes and String are by default eligible for sorting because they
+implements Comparable interface) directly use Collections.sort(data).
+but to sort objects you can not use Collections.sort(data)directly.
+to sort objects you have two techniques
+1. Comparable(less flexible)
+2. Comparator(more flexible)
+
+
+-- Comparable--
+if you want to sort object using Comparable then you must follow below steps-
+A).your class must implements Comparable interface
+B).and override  public int compareTo(Student s) and write sorting logic inside the method
+C). call Collections.sort() method
+for example-
+public static <T extends Comparable<? super T>> void sort(List<T> list) 
+ Student implements Comparable<Student> 
+Collections.sort(data);
+
+
+2.--by using comparator--
+if you want to sort Object using Comparator then follow below Approaches-
+Approach 1-> 
+A).implement Comparator and override public int compare(Student s1, Student s2)  method 
+and provide the logic
+B).1.Collections.sort(data,new Student() ); without polymorphism
+             OR
+   2.Comparator<Student> c=new Student();
+     Collections.sort(data,c ) with polymorphism
+   for your reference
+public static <T> void sort(List<T> list, Comparator<? super T> c) 
+
+Approach 2-> without implementing Comparator interface,you can follow below technique
+
+A).by using anonymous implementation
+   public static Comparator<Student> sortByCgpa= new Comparator<>() {
+	
+	@Override
+	public int compare(Student s1, Student s2) {
+		int cgpa1 = (int) s1.getCGPA();
+		int cgpa2 = (int) s2.getCGPA();
+	int diff= (cgpa1-cgpa2);
+	if(diff==0) {
+	return	s1.getName().compareTo(s2.getName());
+	}
+		
+		
+		return (cgpa1-cgpa2);
+	}
+};
+list.sort(SortingConcepts.sortByCgpa);// by using anonymous
+
+B).By using using lambda expression
+    public static Comparator<Student> sortByUsinglambda = (s1, s2) -> {
+	int cgpa1 = (int) s1.getCGPA();
+	int cgpa2 = (int) s2.getCGPA();
+	int diff = (cgpa1 - cgpa2);
+	if (diff == 0) {
+		return s1.getName().compareTo(s2.getName());
+	}
+
+	return (cgpa1 - cgpa2);
+
+};
+list.sort(SortingConcepts.sortByUsinglambda);// by using lambda expression
+
+
+    

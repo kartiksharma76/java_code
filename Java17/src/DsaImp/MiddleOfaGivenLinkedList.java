@@ -1,0 +1,64 @@
+package DsaImp;
+
+public class MiddleOfaGivenLinkedList {
+	private Node head;
+	private Node tail;
+	private int size;
+
+	public void insert(int data) {
+		Node node = new Node(data, null);
+		if (head == null) {
+			head = node;
+			tail = head;
+			size++;
+		} else {
+			tail.next = node;
+			tail = node;
+			size++;
+		}
+	}
+
+	public int middleNode() {
+		Node node = head;
+		Node temp = head;
+		while (temp != null && temp.next != null) {
+			node = node.next;
+			temp = temp.next.next;
+		}
+		return node.data;
+	}
+
+	public void print() {
+		Node temp = head;
+		while (temp != null) {
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+	}
+
+	public int size() {
+		return size;
+	}
+
+	class Node {
+		private int data;
+		private Node next;
+
+		public Node(int data, Node next) {
+			super();
+			this.data = data;
+			this.next = next;
+		}
+	}
+
+	public static void main(String[] args) {
+		MiddleOfaGivenLinkedList list = new MiddleOfaGivenLinkedList();
+		list.insert(10);
+		list.insert(20);
+		list.insert(30);
+		list.insert(40);
+		list.insert(50);
+		list.print();
+		System.out.println("middle Node :" + list.middleNode());
+	}
+}
