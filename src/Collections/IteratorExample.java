@@ -1,0 +1,29 @@
+package Collections;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class IteratorExample {
+    public static void main(String[] args) {
+        ArrayList<String> names = new ArrayList<>();
+        names.add("Rahul");
+        names.add("Aman");
+        names.add("Kartik");
+
+        for (int i = 0; i< names.size(); i++){
+            System.out.println(names.get(i));
+        }
+
+        for (String name : names) {
+            System.out.println(name);
+        }
+        Iterator<String> itr = names.iterator();
+
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+            names.forEach(name -> System.out.println(name));
+        }
+
+
+    }
+}
