@@ -9,7 +9,7 @@ import java.util.concurrent.TimeoutException;
 
 public class CyclicBarrierExample {
 	public static void main(String[] args) {
-		ExecutorService gameStartService = Executors.newFixedThreadPool(1);
+		ExecutorService gameStartService = Executors    .newFixedThreadPool(1);
 		Runnable mixedDoubleTenisGameStart = () -> {
 			System.out.println("All 4 players ready, game starts, best of luck...");
 		};
